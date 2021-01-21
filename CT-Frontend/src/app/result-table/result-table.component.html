@@ -1,0 +1,42 @@
+<h3>
+    <span class="icon count"></span>
+    <span>Books Found</span>
+    <span class="book-count" title="Search Results Book Count">{{ bookList.length }}</span>
+</h3><br>
+<div class="toggle-avail">
+    <h4>Filter : </h4>
+    <label for="available" class="check-box">
+        <input type="checkbox">
+        <span class="check-mark"></span>
+        <span class="check-text">Available Books</span>
+        <span class="b-avail"></span>
+    </label>
+    <label for="unavail" class="check-box">
+        <input type="checkbox">
+        <span class="check-mark"></span>
+        <span class="check-text">Unavailable Books</span>
+        <span class="b-unavail"></span>
+    </label>
+</div>
+<div class="result-wrapper">
+    <table class="result">
+        <thead>
+            <th class="b-id">ID</th>
+            <th class="b-title">Book Title</th>
+            <th class="b-auth">Author</th>
+            <th class="b-pub">Publications</th>
+            <th class="b-year">Year</th>
+            <th class="b-avail-head">Availability</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of bookList">
+                <td>{{ getBookID(book.bCategory, book.bID) }}</td>
+                <td>{{ book.bName }}</td>
+                <td>{{ book.bAuthor }}</td>
+                <td>{{ book.bPublish }}</td>
+                <td>{{ book.bYear }}</td>
+                <td><span [ngClass]="(book.bCopy == 0) ? 'b-unavail' : 'b-avail'"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

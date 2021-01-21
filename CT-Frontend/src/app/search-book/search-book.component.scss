@@ -1,0 +1,59 @@
+:host{
+    flex: 1;
+    display: flex;
+}
+.main, .result-table{
+    display: flex;
+    border-radius: 3px;
+}
+.main{
+    width: 22%;
+    flex-direction: column;
+    border-top: 1px solid gainsboro;
+    border-right: 1px solid gainsboro;
+    margin-right: 1em;
+}
+.side-bar{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(25,111,185,0.15);
+}
+.side-bar h2{
+    font-size: 1.25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.top-content{
+    padding: 1em 0.5em;
+    width: 75%;
+}
+.top-count{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5em;    
+}
+.search{
+    width: 3.5em;
+    height: 3.5em;
+    background-size: 3em;
+    background-image: url("../../assets/img/search.png");
+    margin: 0 0.5em;
+}
+.note{
+    font-size: 0.65em;
+    letter-spacing: 1px;
+    padding: 1em 0;
+    line-height: 1.75em;
+    border-radius: 3px;
+    display: block;
+    font-weight: normal;
+}
+.result-table{
+    flex: 1;
+    box-shadow: none;
+    margin: 1em 1em 1em 0;
+    flex-direction: column;
+}

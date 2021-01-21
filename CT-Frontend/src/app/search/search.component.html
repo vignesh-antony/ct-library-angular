@@ -1,0 +1,32 @@
+<section class="filter" spellcheck="false">
+    <h3>
+        <span>Search Filter</span>
+        <span class="icon reset" title="Reset" (click)="resetFields()"></span>
+    </h3>
+    <div class="input-wrap">
+        <input type="text" [(ngModel)]="title" required autocomplete="off">
+        <span class="text">Book Title</span>
+        <div class="filter-box"></div>
+    </div>
+    <div class="input-wrap">
+        <input type="text" [(ngModel)]="category" required autocomplete="off">
+        <span class="text">Book Category</span>
+        <div class="filter-box"></div>
+    </div>
+    <div class="input-wrap">
+        <input type="text" [(ngModel)]="author" required autocomplete="off">
+        <span class="text">Book Author</span>
+        <div class="filter-box"></div>
+    </div>
+    <div class="input-wrap">
+        <input type="text" [(ngModel)]="publisher" required autocomplete="off">
+        <span class="text">Publications</span>
+        <div class="filter-box"></div>
+    </div>
+    <div class="input-wrap">
+        <input type="text" [(ngModel)]="year" required autocomplete="off">
+        <span class="text">Published Year</span>
+        <div class="filter-box"></div>
+    </div>
+    <button class="button" (click)="searchBook()">Search Books</button>
+</section>

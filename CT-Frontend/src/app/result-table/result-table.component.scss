@@ -1,0 +1,108 @@
+:host{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+:host h3{
+    display: flex;
+    align-items: center;
+}
+.count{
+    background-size: 1em;
+    background-image: url("../../assets/img/lib-logo.png");
+}
+.book-count{
+    font-size: 0.85em;
+    padding: 0.25em 1em;
+    background-color: whitesmoke;
+    margin-left: 1.5em;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+}
+.toggle-avail{
+    width: max-content;
+    display: inline-flex;
+    align-items: center;
+    box-shadow: 0px 0px 1px 0px gray;
+    padding: 0.5em;
+    border-radius: 5px;
+    margin: 0.25em;
+}
+.toggle-avail .check-box{
+    padding: 0.5em;
+    cursor: pointer;
+}
+.toggle-avail .check-mark::after{
+    top: 0em !important;
+}
+.toggle-avail .check-text{
+    font-size: 0.85em;
+    letter-spacing: 1px;
+    margin-right: 0.75em;
+}
+.result-wrapper{
+    flex: 1;
+    margin-top: 1em;
+    overflow-y: auto;
+    position: relative;
+}
+.result-wrapper::-webkit-scrollbar{
+    width: 0.5em;
+    background-color: #ddd;
+}
+.result-wrapper::-webkit-scrollbar-thumb{
+    background-color: #196fb9;
+}
+.result{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border-bottom: 1px solid rgba(25,111,185,0.5);
+}
+.result thead tr th:last-of-type{
+    text-align: center;
+}
+.result tr{
+    transition: 0.2s;
+    cursor: default;
+    width: 100%;
+}
+.result tr:nth-child(even){
+    background-color: rgba(25,111,185,0.1);
+}
+.result tr:hover{
+    color: #0f3e68;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2);
+}
+.result td, .result th{
+    padding: 1em;
+    border-bottom: 1px solid #ddd;
+}
+.result th{
+    background-color: #0f3e68;
+    color: white;
+    text-align: left;   
+}
+.b-title{
+    width: 35%;
+}
+.b-auth{
+    width: 20%;
+}
+.result th.b-avail-head{
+    text-align: center;
+}
+.b-avail, .b-unavail{
+    display: block;
+    margin: auto;
+    width: 0.85em;
+    height: 0.85em;
+    background-color: rgb(52, 194, 113);
+    border-radius: 50%;
+}
+.b-unavail{
+    background-color: rgb(226, 12, 12);
+}

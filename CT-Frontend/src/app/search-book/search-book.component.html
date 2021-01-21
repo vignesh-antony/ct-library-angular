@@ -1,0 +1,20 @@
+<div class="main">
+    <section class="side-bar">
+        <h2>
+            <div class="top-content">
+                <div class="top-count">
+                    <span>Search Books</span>
+                </div>
+                <hr>
+                <span class="note">
+                    You can search the available books using its <b>title, author name, publications and published year</b>.
+                </span>
+            </div>
+            <span class="icon search"></span>
+        </h2>
+    </section>
+    <search-filter (dataFound)="setResultData($event)"></search-filter>
+</div>
+<div class="result-table">
+    <result-table *ngIf="result && result.length" [result]="result"></result-table>
+</div>

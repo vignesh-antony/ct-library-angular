@@ -1,0 +1,90 @@
+.menu-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3em;
+    font-size: 1.65em;
+    box-shadow: 0px 0.25px 0px 0px gray;
+}
+.icon{
+    background-image: url("../../assets/img/lib-logo-design.png");
+}
+.head{
+    margin-left: 0.5em;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.head span:nth-child(2){
+    font-size: 0.5em;
+    color: rgb(25,111,185);
+    letter-spacing: 1.5px;
+    font-weight: 500;
+}
+.menu-icon{
+    background-size: 0.75em;
+    background-image: url("../../assets/img/mainmenu.png");
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s;
+}
+.menu-list{
+    display: flex;
+    font-size: 0.6em;
+    list-style: none;
+}
+.menu-list a, .menu-list span{
+    text-decoration: none;
+    color: black;
+    padding: 0.5em 1em;
+    font-weight: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.15s;
+}
+.menu-list a li{
+    display: block;
+}
+.menu-list a::before, .menu-list span::before{
+    content: '';
+    width: 1em;
+    height: 1em;
+    background-size: 0.95em;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/img/setting-icon.png");
+    margin-right: 0.35em;
+}
+.menu-list .home-menu::before{
+    background-image: url("../../assets/img/home-icon.png");
+}
+.menu-list .add-menu::before{
+    background-image: url("../../assets/img/add-icon.png");
+}
+.menu-list .issue-menu::before,
+.menu-list .renew-menu::before{
+    background-image: url("../../assets/img/up.png");
+}
+.menu-list .renew-menu::before{
+    transform: rotate(180deg);
+}
+.menu-list .log-menu::before{
+    background-image: url("../../assets/img/logout.png");
+}
+.menu-list .search-menu::before{
+    background-image: url("../../assets/img/search-menu.png");
+}
+.menu-list .borrow-menu::before{
+    background-size: 1em;
+    filter: grayscale(100%);
+    background-image: url("../../assets/img/book-menu.png");
+}
+.menu-list .expire-menu::before{
+    background-image: url("../../assets/img/expire-menu.png");
+}
+.menu-list a:hover, .menu-list span:hover{
+    color: #196fb8;
+}
