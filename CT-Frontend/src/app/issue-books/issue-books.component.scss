@@ -1,0 +1,19 @@
+.issue-bar{
+    background-color: rgb(214, 255, 194);
+}
+.issue{
+    width: 100%;
+    margin: 1em 0em;
+}
+.issue .selected{
+    padding: 0.6em;
+}
+.issue .select-dropdown{
+    max-height: 15em;
+    overflow-y: auto;
+}
+.issue-book{
+    background-size: 3em;
+    background-image: url("../../assets/img/issue-books.png");
+    margin-bottom: 0.5em;
+}

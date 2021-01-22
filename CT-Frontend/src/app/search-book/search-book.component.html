@@ -13,8 +13,8 @@
             <span class="icon search"></span>
         </h2>
     </section>
-    <search-filter (dataFound)="setResultData($event)"></search-filter>
+    <search-filter [config]="getConfig()" (dataFound)="setResultData($event)"></search-filter>
 </div>
 <div class="result-table">
-    <result-table *ngIf="result && result.length" [result]="result"></result-table>
+    <result-table *ngIf="result && result.length" [result]="result" [config]="getConfig()"></result-table>
 </div>

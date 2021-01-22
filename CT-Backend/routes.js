@@ -22,4 +22,12 @@ routes.get('/pending-books',(req, res) => {
     })
 });
 
+routes.post('/issue-books',(req, res) => {
+    db.issueBooks(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+
 module.exports = routes;

@@ -98,3 +98,19 @@ input:-webkit-autofill:active{
 .button:hover{
     background-color: #0f3e68;
 }
+.renew-button{
+    display: block;
+    padding: 0.6em 1em;
+    font-size: 0.95em;
+    font-weight: 500;
+    margin: 1.5em 0em;
+    color: white;
+    border-radius: 2px;
+    background-color: #196fb9;
+    border: none;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover{
+        background-color: #0f3e68;
+    }
+}

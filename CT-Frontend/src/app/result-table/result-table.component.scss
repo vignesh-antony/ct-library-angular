@@ -106,3 +106,37 @@
 .b-unavail{
     background-color: rgb(226, 12, 12);
 }
+.stock{
+    text-align: center !important;
+}
+.stock-avail, .stock-unavail{
+    text-align: center;
+    color: seagreen;
+    font-weight: bold;
+}
+.stock-unavail{
+    color: rgb(150,0,0);
+}
+.i-button{
+    text-align: center !important;
+}
+.issue-button{
+    padding: 0.5em 1em;
+    font-size: 0.9em;
+    background-color: seagreen;
+    color: white;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.2s;
+}
+.issue-button:hover{
+    background-color: rgb(9, 49, 9);
+}
+.issued{
+    background-color: rgb(150,0,0);
+}
+.issued:hover{
+    background-color: rgb(150,0,0);
+}

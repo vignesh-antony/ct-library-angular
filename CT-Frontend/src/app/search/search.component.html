@@ -1,32 +1,56 @@
-<section class="filter" spellcheck="false">
-    <h3>
+<section [class.filter]="conf.type != 'renew-book'" spellcheck="false">
+    <h3 *ngIf="conf.type != 'renew-book'">
         <span>Search Filter</span>
         <span class="icon reset" title="Reset" (click)="resetFields()"></span>
     </h3>
-    <div class="input-wrap">
-        <input type="text" [(ngModel)]="title" required autocomplete="off">
-        <span class="text">Book Title</span>
-        <div class="filter-box"></div>
-    </div>
-    <div class="input-wrap">
-        <input type="text" [(ngModel)]="category" required autocomplete="off">
-        <span class="text">Book Category</span>
-        <div class="filter-box"></div>
-    </div>
-    <div class="input-wrap">
-        <input type="text" [(ngModel)]="author" required autocomplete="off">
-        <span class="text">Book Author</span>
-        <div class="filter-box"></div>
-    </div>
-    <div class="input-wrap">
-        <input type="text" [(ngModel)]="publisher" required autocomplete="off">
-        <span class="text">Publications</span>
-        <div class="filter-box"></div>
-    </div>
-    <div class="input-wrap">
-        <input type="text" [(ngModel)]="year" required autocomplete="off">
-        <span class="text">Published Year</span>
-        <div class="filter-box"></div>
-    </div>
-    <button class="button" (click)="searchBook()">Search Books</button>
+    <form-select 
+        *ngIf="conf.options"
+        [options]="conf.options" 
+        (selectValue)="updateSelectValue($event)">
+    </form-select>
+    <ng-container *ngIf="conf.type != 'renew-book'">
+        <div class="input-wrap">
+            <input type="text" [(ngModel)]="title" required autocomplete="off">
+            <span class="text">Book Title</span>
+            <div class="filter-box"></div>
+        </div>
+        <div class="input-wrap">
+            <input type="text" [(ngModel)]="category" required autocomplete="off">
+            <span class="text">Book Category</span>
+            <div class="filter-box"></div>
+        </div>
+        <div class="input-wrap">
+            <input type="text" [(ngModel)]="author" required autocomplete="off">
+            <span class="text">Book Author</span>
+            <div class="filter-box"></div>
+        </div>
+        <div class="input-wrap">
+            <input type="text" [(ngModel)]="publisher" required autocomplete="off">
+            <span class="text">Publications</span>
+            <div class="filter-box"></div>
+        </div>
+        <div class="input-wrap">
+            <input type="text" [(ngModel)]="year" required autocomplete="off">
+            <span class="text">Published Year</span>
+            <div class="filter-box"></div>
+        </div>    
+    </ng-container>
+    <button 
+        class="button" 
+        (click)="searchBook()" 
+        *ngIf="conf.type == 'search-book'">
+        Search Books
+    </button>
+    <button 
+        class="button" 
+        (click)="searchBook()" 
+        *ngIf="conf.type == 'issue-book'">
+        Check Availability
+    </button>
+    <button 
+        class="renew-button" 
+        (click)="viewBook()" 
+        *ngIf="conf.type == 'renew-book'">
+        View Books
+    </button>
 </section>

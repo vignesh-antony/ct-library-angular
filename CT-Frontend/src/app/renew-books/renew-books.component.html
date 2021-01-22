@@ -1,0 +1,31 @@
+<section class="main">
+    <div class="side-bar">
+        <div class="side-content">
+            <h2>Renew - Return Books</h2><hr>
+            <span class="note">
+                You can renew or return books by <b>selecting the staff</b> whose books have to be renewed / returned. Then, either <b>click on renew / return buttons</b>. 
+            </span>
+        </div>
+        <span class="icon renew"></span>
+    </div>
+    <div class="main-bar">
+        <div class="renew-section">
+            <h3>Select Staff</h3>
+            <div class="note">
+                <b>Note : </b> Each book should be renewed within a time period of months. <a href="" class="change">Click here to change renewal time period.</a>
+            </div>
+            <search-filter 
+                [config]="getConfig()" 
+                (dataFound)="setResultData($event)"
+                [value_change]="value_change">
+            </search-filter>
+        </div>
+    </div>
+</section>
+<div class="result-table">
+    <result-table 
+        *ngIf="result && result.length" 
+        [result]="result" 
+        [config]="getConfig()">
+    </result-table>
+</div>

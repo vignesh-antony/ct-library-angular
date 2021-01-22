@@ -1,0 +1,24 @@
+<div class="main">
+    <section class="side-bar issue-bar">
+        <h2>
+            <div class="top-content">
+                <span class="top-count">Issue Books</span><hr>
+                <span class="note">
+                    You can issue the books to the staffs by selecting the staff, the book and then click on the <b>Issue</b> button. 
+                </span>
+            </div>
+            <span class="icon search issue-book"></span>
+        </h2>
+    </section>
+    <search-filter 
+        [config]="getConfig()" 
+        (dataFound)="setResultData($event)"
+        [value_change]="value_change"></search-filter>
+</div>
+<div class="result-table">
+    <result-table 
+        *ngIf="result && result.length" 
+        [result]="result" 
+        [config]="getConfig()"
+        (issueBook)="issueBook($event)"></result-table>
+</div>

@@ -3,7 +3,7 @@
     <span>Books Found</span>
     <span class="book-count" title="Search Results Book Count">{{ bookList.length }}</span>
 </h3><br>
-<div class="toggle-avail">
+<div class="toggle-avail" *ngIf="conf.type == 'search-book'">
     <h4>Filter : </h4>
     <label for="available" class="check-box">
         <input type="checkbox">
@@ -26,7 +26,18 @@
             <th class="b-auth">Author</th>
             <th class="b-pub">Publications</th>
             <th class="b-year">Year</th>
-            <th class="b-avail-head">Availability</th>
+            <th class="stock" 
+                *ngIf="conf.type == 'issue-book'">
+                Stock
+            </th>
+            <th class="stock" 
+                *ngIf="conf.type == 'issue-book'">
+                Issue
+            </th>
+            <th class="b-avail-head"
+                *ngIf="conf.type == 'search-book'">
+                Availability
+            </th>
         </thead>
         <tbody>
             <tr *ngFor="let book of bookList">
@@ -35,7 +46,23 @@
                 <td>{{ book.bAuthor }}</td>
                 <td>{{ book.bPublish }}</td>
                 <td>{{ book.bYear }}</td>
-                <td><span [ngClass]="(book.bCopy == 0) ? 'b-unavail' : 'b-avail'"></span></td>
+                <td 
+                    *ngIf="conf.type == 'issue-book'" 
+                    [ngClass]="(book.bCopy == 0) ? 'stock-unavail' : 'stock-avail'">
+                    {{ book.bCopy }}
+                </td>
+                <td 
+                    *ngIf="conf.type == 'issue-book'" 
+                    class="i-button">
+                    <button class="issue-button" 
+                        *ngIf="book.bCopy != 0"
+                        (click)="issue(book.bID)">Issue</button>
+                    <button class="issue-button issued" *ngIf="book.bCopy == 0">Taken</button>
+                </td>
+                <td 
+                    *ngIf="conf.type == 'search-book'">
+                    <span [ngClass]="(book.bCopy == 0) ? 'b-unavail' : 'b-avail'"></span>
+                </td>
             </tr>
         </tbody>
     </table>

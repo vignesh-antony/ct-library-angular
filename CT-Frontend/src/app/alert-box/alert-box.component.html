@@ -1,0 +1,19 @@
+<div class="alert-wrap" *ngIf="showAlert" [ngClass]="{ 'alert-flex':showAlert }">
+    <div class="alert-box">
+        <div class="wrap">
+            <span class="icon alert" [ngClass]="{ 
+                'alert-correct':(data.status == 'Success'),
+                'alert-wrong':(data.status == 'Error'),
+                'alert-warning':(data.status == 'Warning')  }">
+            </span>
+        </div>
+        <p class="alert-msg">
+            <b>{{ data.message }}</b>
+            <span class="sub-msg">{{ data.description }}</span>
+        </p>
+        <div class="button-alert">
+            <!-- <button class="alert-cancel">Cancel</button> -->
+            <button class="alert-ok" (click)="hideAlert()">Okay</button>
+        </div>
+    </div>
+</div>

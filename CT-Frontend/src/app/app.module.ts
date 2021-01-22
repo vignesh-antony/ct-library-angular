@@ -12,6 +12,10 @@ import { SearchComponent } from './search/search.component';
 import { ResultTableComponent } from './result-table/result-table.component';
 import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
 import { PendingBooksComponent } from './pending-books/pending-books.component';
+import { IssueBooksComponent } from './issue-books/issue-books.component';
+import { FormSelectComponent } from './form-select/form-select.component';
+import { AlertBoxComponent } from './alert-box/alert-box.component';
+import { RenewBooksComponent } from './renew-books/renew-books.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { PendingBooksComponent } from './pending-books/pending-books.component';
     SearchComponent,
     ResultTableComponent,
     BorrowedBooksComponent,
-    PendingBooksComponent
+    PendingBooksComponent,
+    IssueBooksComponent,
+    FormSelectComponent,
+    AlertBoxComponent,
+    RenewBooksComponent
   ],
   imports: [
     BrowserModule,

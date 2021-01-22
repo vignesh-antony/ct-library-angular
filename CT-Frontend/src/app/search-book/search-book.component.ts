@@ -10,6 +10,12 @@ export class SearchBookComponent implements OnInit {
     result:any;
     constructor() { }
 
+    getConfig(){
+        let config = {
+            type:"search-book"
+        }
+        return config;
+    }
     setResultData(value:any){
         this.result = value;
     }
