@@ -11,6 +11,7 @@ import { SearchBookComponent } from './search-book/search-book.component';
 import { SearchComponent } from './search/search.component';
 import { ResultTableComponent } from './result-table/result-table.component';
 import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
+import { PendingBooksComponent } from './pending-books/pending-books.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.componen
     SearchBookComponent,
     SearchComponent,
     ResultTableComponent,
-    BorrowedBooksComponent
+    BorrowedBooksComponent,
+    PendingBooksComponent
   ],
   imports: [
     BrowserModule,

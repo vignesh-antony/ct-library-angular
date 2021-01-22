@@ -1,0 +1,31 @@
+<div class="main">
+    <h3 class="borrow-title">
+        <span>Borrowed Books</span>
+        <span>{{ bookList.length }}</span>
+    </h3>
+    <ng-container *ngFor="let book of bookList; let i = index">
+        <div class="book-date" *ngIf="prevDate[i]">{{ prevDate[i] }}</div>
+        <div class="box">
+            <div class="book-details">
+                <h4>{{ book.bName }}</h4>
+                <span class="b-author">{{ book.bAuthor }}&nbsp;</span>
+                <div class="b-publicate">
+                    <span *ngIf="book.bPublish">{{ book.bPublish }}</span>
+                    <span *ngIf="book.bYear"> - {{ book.bYear }}</span>
+                </div>
+                <span class="renew-date">Due Date &nbsp;:&nbsp; {{ getDate(book.timeOut,"DD-MM-YYYY") }}</span>
+            </div>
+            <div class="book-time" title="Issued Date and Time">
+                <span class="icon"></span>
+                <span class="rem-days" [ngClass]="{'late' : checkDate(book.timeOut) }">
+                    {{ getRemainingDays(book.timeOut) }}
+                    <span *ngIf="checkDate(book.timeOut); else left">Late</span>
+                    <ng-template #left>Left</ng-template>    
+                </span>
+                <span class="b-date">{{ getDate(book.timeIn,"DD-MM-YYYY") }}</span>
+                <span class="b-time">{{ getDate(book.timeIn,"hh:mm A") }}</span>
+            </div>
+        </div>
+    </ng-container>
+    
+</div>

@@ -8,4 +8,18 @@ routes.post('/book-list',(req, res) => {
     })
 });
 
+routes.get('/borrowed-books',(req, res) => {
+    db.getBorrowedBooks(1)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.get('/pending-books',(req, res) => {
+    db.getBorrowedBooks(58)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
 module.exports = routes;

@@ -1,0 +1,25 @@
+<div class="main">
+    <h3 class="expire-title">
+        <span>Pending Books</span>
+        <span class="expire-count">{{ bookList.length }}</span>
+    </h3>
+    <ng-container *ngFor="let book of bookList; let i = index">
+        <div class="book-date" *ngIf="prevDate[i]">{{ prevDate[i] }}</div>
+        <div class="box">
+            <div class="book-details">
+                <h4>{{ book.bName }}</h4>
+                <span class="b-author">{{ book.bAuthor }}&nbsp;</span>
+                <div class="b-publicate">
+                    <span *ngIf="book.bPublish">{{ book.bPublish }}</span>
+                    <span *ngIf="book.bYear"> - {{ book.bYear }}</span>
+                </div>
+                <span class="status">Pending</span>
+            </div>
+            <div class="book-time" title="Due date">
+                <span>Renewal Date <br> {{ getDate(book.timeOut,"DD-MM-YYYY hh:mm a") }}</span>
+                <span class="late-by">{{ getTimeInterval(book.timeOut) }}</span>
+            </div>
+        </div>
+    </ng-container>
+    
+</div>
