@@ -140,3 +140,70 @@
 .issued:hover{
     background-color: rgb(150,0,0);
 }
+.renew-wrap tr{
+    &:hover{
+        color: unset;
+        box-shadow: unset;
+    }
+}
+.r-id{
+    width: 10%;
+}
+.r-title{
+    font-weight: bold;
+}
+.r-pub, .r-author{
+    display: block;
+    font-size: 0.75em;
+    color: #0f3e68;
+}
+.time{
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
+.expired{
+    color: rgb(250,0,0);
+    font-weight: 500;
+}
+.r-button{
+    color: white;
+    background-color: #196fb9;
+    font-size: 0.9em;
+    padding: 0.6em 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: block;
+    margin: auto;
+}
+.r-button:hover{
+    background-color: #0f3e68;
+}
+.return{
+    background-color: rgb(150,0,0);
+}
+.return:hover{
+    background-color: rgb(200,0,0);
+}
+.renew-result-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+.renew-result-staff{
+    color: #0f3e68;
+    margin-left: 0.5em;
+    margin-right: auto;
+}
+.renew-result-count{
+    font-size: 0.75em;
+    background-color: whitesmoke;
+    padding: 0.25em 0.75em;
+    border-radius: 2px;
+    border: 1px solid grey;
+    display: inline-block;
+    margin-left: 1em;
+}

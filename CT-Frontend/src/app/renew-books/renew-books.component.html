@@ -17,6 +17,7 @@
             <search-filter 
                 [config]="getConfig()" 
                 (dataFound)="setResultData($event)"
+                (selected)="setSelectValue($event)"
                 [value_change]="value_change">
             </search-filter>
         </div>
@@ -25,7 +26,10 @@
 <div class="result-table">
     <result-table 
         *ngIf="result && result.length" 
-        [result]="result" 
-        [config]="getConfig()">
+        [result]="result"
+        [select]="staff_name" 
+        [config]="getConfig()"
+        (renewBook)="renewBook($event)"
+        (returnBook)="returnBook($event)">
     </result-table>
 </div>

@@ -8,15 +8,22 @@ routes.post('/book-list',(req, res) => {
     })
 });
 
-routes.get('/borrowed-books',(req, res) => {
-    db.getBorrowedBooks(1)
+routes.get('/staff-list',(req, res) => {
+    db.getStaffList()
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.get('/borrowed-books/:id',(req, res) => {
+    db.getBorrowedBooks(req.params['id'])
     .then((value)=>{
         res.send(value);
     })
 });
 
 routes.get('/pending-books',(req, res) => {
-    db.getBorrowedBooks(58)
+    db.getPendingBooks(1)
     .then((value)=>{
         res.send(value);
     })
@@ -29,5 +36,46 @@ routes.post('/issue-books',(req, res) => {
     })
 });
 
+routes.post('/renew-books',(req, res) => {
+    db.renewBooks(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.post('/return-books',(req, res) => {
+    db.returnBooks(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.get('/book-category',(req, res) => {
+    db.getBookCategory()
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.post('/set-category',(req, res) => {
+    db.setBookCategory(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.post('/update-category',(req, res) => {
+    db.updateBookCategory(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.post('/delete-category',(req, res) => {
+    db.deleteBookCategory(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
 
 module.exports = routes;

@@ -16,6 +16,8 @@ import { IssueBooksComponent } from './issue-books/issue-books.component';
 import { FormSelectComponent } from './form-select/form-select.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { RenewBooksComponent } from './renew-books/renew-books.component';
+import { BookCategoryComponent } from './book-category/book-category.component';
+import { PopupComponent } from './popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { RenewBooksComponent } from './renew-books/renew-books.component';
     IssueBooksComponent,
     FormSelectComponent,
     AlertBoxComponent,
-    RenewBooksComponent
+    RenewBooksComponent,
+    BookCategoryComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,112 @@
+.add-box-wrap{
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    position: fixed;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.modal-active{
+    display: flex;
+}
+.add-box{
+    background-color: white;
+    width: 25%;
+    padding: 2em;
+    border-radius: 0.5em;
+    box-shadow: 0px 0px 2px 0px gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: slide-up 0.2s linear;
+}
+@keyframes slide-up{
+    0%{
+        margin-top: 5em;
+        opacity: 0;
+    }
+    100%{
+        margin-top: 0em;
+        opacity: 1;
+    }
+}
+.button-wrap{
+    align-self: flex-start;
+}
+.pop-button{
+    cursor: pointer;
+    padding: 0.65em 1.5em;
+    margin: 1em 0;
+    margin-right: 0.75em;
+    font-size: 0.9em;
+    background-color: #196fb8;
+    border: 1px solid #196fb8;
+    color: white;
+    &:hover{
+        background-color: #093963;
+    }
+    transition: 0.35s ease-in-out;
+}
+.pop-reset{
+    border: 1px solid #196fb8;
+    background-color: white;
+    color: #196fb8;
+}
+.pop-reset:hover{
+    background-color: rgba(25, 111, 184,0.1);
+    color: #0f3e68;
+}
+.add-box h3{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 0.25em;
+    border-bottom: 0.5px solid gray;
+    margin-bottom: 1em;
+}
+.add-box .icon{
+    width: 1.25em;
+    height: 1.25em;
+    background-size: 0.9em;
+    background-image: url("../../assets/img/filter.png");
+}
+.add-box h3 span:nth-child(2){
+    margin-left: 0.35em;
+    margin-right: auto;
+}
+.close-wrap{
+    width: 2em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.close{
+    width: inherit;
+    height: inherit;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.close::before,
+.close::after{
+    content: '';
+    width: 0.75em;
+    height: 2px;
+    background-color: black;
+    display: inline-block;
+    position: absolute;
+}
+.close::before{
+    transform: rotate(45deg);
+}
+.close::after{
+    transform: rotate(-45deg);
+}

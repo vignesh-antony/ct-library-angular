@@ -12,6 +12,7 @@ export class FormSelectComponent implements OnInit {
 
     dropdown:boolean;
     optionList:any;
+    current_value:string;
     
     constructor() { }
 
@@ -20,11 +21,14 @@ export class FormSelectComponent implements OnInit {
     }
     updateOption(pos:any, option:any){
         this.optionList.selected = pos;
+        this.current_value = this.optionList.list[pos].name;
+
         this.selectValue.emit(option);
         this.toggleDropDown();
     }
     ngOnInit(): void {
         this.optionList = this.options;
+        this.current_value = this.optionList.list[this.optionList.selected].name;
     }
     ngOnChanges(){
         this.optionList = this.options;

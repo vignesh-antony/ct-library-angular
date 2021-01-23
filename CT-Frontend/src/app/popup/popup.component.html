@@ -1,0 +1,19 @@
+<section class="add-box-wrap" [class.modal-active]="view">
+    <div class="add-box" spellcheck="false">
+        <h3>
+            <span class="icon"></span>
+            <span>{{ data.heading }}</span>
+            <div class="close-wrap" (click)="closeModal()" title="Close">
+                <span class="close"></span>
+            </div>
+        </h3>
+        <div class="input-wrap" *ngFor="let field of data.fields; let i = index">
+            <input type="text" [(ngModel)]="input[i]" required>
+            <span class="text">{{ field.name }}</span>
+        </div>
+        <div class="button-wrap">
+            <button class="pop-button" (click)="postData()">{{ data.button }}</button>
+            <button class="pop-button pop-reset" (click)="resetModal()">Reset</button>
+        </div>
+    </div>
+</section>

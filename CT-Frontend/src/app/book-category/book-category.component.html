@@ -1,0 +1,38 @@
+<section class="main">
+    <h3 class="main-title">
+        <span class="icon"></span>
+        <span>Book Category</span>
+        <span class="count">{{ category.length }}</span>
+        <button class="button" (click)="showPopup()">+ Add Category</button>
+    </h3><hr>
+    <div class="result-table">
+        <table class="result">
+            <thead>
+                <th>S.No</th>
+                <th>Category Code</th>
+                <th class="left">Category Name</th>
+                <th>Book Count</th>
+                <th class="edit">Edit</th>
+                <th class="delete">Delete</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let categ of category; let i = index">
+                    <td>{{ i+1 }}</td>
+                    <td style="font-weight: 500;">{{ categ.cID }}</td>
+                    <td class="left">{{ categ.cName }}</td>
+                    <td>{{ categ.bcount }}</td>
+                    <td><span class="edit-icon" (click)="showPopup([categ.cID, categ.cName])"></span></td>
+                    <td><span class="delete-icon" (click)="deleteCateg(categ.cID, categ.bcount)"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<popup 
+    *ngIf="modalView"
+    [config]="getConfig()"
+    [popup]="modalView"
+    [popup_value]="value"
+    (hideView)="closePopup($event)"
+    (modalData)="postData($event)">
+</popup>

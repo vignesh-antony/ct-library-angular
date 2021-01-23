@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { BookCategoryComponent } from './book-category/book-category.component';
+import { BookCategoryResolver } from './book-category/book-category.resolver';
 import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
 import { BorrowedBooksResolver } from './borrowed-books/borrowed-books.resolver';
 import { IssueBooksComponent } from './issue-books/issue-books.component';
@@ -7,6 +9,7 @@ import { PendingBooksComponent } from './pending-books/pending-books.component';
 import { PendingBooksResolver } from './pending-books/pending-books.resolver';
 import { RenewBooksComponent } from './renew-books/renew-books.component';
 import { SearchBookComponent } from './search-book/search-book.component';
+import { StaffResolver } from './search/staff.resolver';
 
 const routes: Routes = [
     {
@@ -29,11 +32,24 @@ const routes: Routes = [
     },
     {
         path:"issue-books",
-        component:IssueBooksComponent
+        component:IssueBooksComponent,
+        resolve:{
+            data:StaffResolver
+        }
     },
     {
         path:"renew-books",
-        component:RenewBooksComponent
+        component:RenewBooksComponent,
+        resolve:{
+            data:StaffResolver
+        }
+    },
+    {
+        path:"book-category",
+        component:BookCategoryComponent,
+        resolve:{
+            data:BookCategoryResolver
+        }
     }
 ];
 

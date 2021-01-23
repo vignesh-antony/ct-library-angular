@@ -1,8 +1,17 @@
-<h3>
-    <span class="icon count"></span>
-    <span>Books Found</span>
-    <span class="book-count" title="Search Results Book Count">{{ bookList.length }}</span>
-</h3><br>
+<ng-container *ngIf="conf.type != 'renew-book'">
+    <h3>
+        <span class="icon count"></span>
+        <span>Books Found</span>
+        <span class="book-count" title="Search Results Book Count">{{ bookList.length }}</span>
+    </h3><br>
+</ng-container>
+<ng-container *ngIf="conf.type == 'renew-book' && bookList.length != 0">
+    <h3 class="renew-result-title">
+        <span>Staff Name : </span>
+        <span class="renew-result-staff">{{ selected.name }}</span>
+        <span class="renew-result-count">{{ bookList.length }}</span>
+    </h3><hr>
+</ng-container>
 <div class="toggle-avail" *ngIf="conf.type == 'search-book'">
     <h4>Filter : </h4>
     <label for="available" class="check-box">
@@ -19,7 +28,7 @@
     </label>
 </div>
 <div class="result-wrapper">
-    <table class="result">
+    <table class="result" *ngIf="conf.type != 'renew-book'">
         <thead>
             <th class="b-id">ID</th>
             <th class="b-title">Book Title</th>
@@ -63,6 +72,30 @@
                     *ngIf="conf.type == 'search-book'">
                     <span [ngClass]="(book.bCopy == 0) ? 'b-unavail' : 'b-avail'"></span>
                 </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="result renew-wrap" *ngIf="conf.type == 'renew-book'">
+        <thead>
+            <th class="r-id">ID</th>
+            <th class="b-title">Book Details</th>
+            <th>Issued Date</th>
+            <th>Due Date</th>
+            <th class="stock">Renew</th>
+            <th class="stock">Return</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of bookList">
+                <td>{{ getBookID(book.bCategory, book.bID) }}</td>
+                <td>
+                    <span class="r-title">{{ book.bName }}</span>
+                    <span class="r-author">{{ book.bAuthor }}</span>
+                    <span class="r-pub">{{ book.bPublish }}</span>
+                </td>
+                <td class="time" [innerHTML]="getDateTime(book.timeIn)"></td>
+                <td class="time" [innerHTML]="getDateTime(book.timeOut)" [class.expired]="checkDate(book.timeOut)"></td>
+                <td><button class="r-button" (click)="renew(book.bID)">Renew</button></td>
+                <td><button class="r-button return" (click)="return(book.bID)">Return</button></td>
             </tr>
         </tbody>
     </table>
