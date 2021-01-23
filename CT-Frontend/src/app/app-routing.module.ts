@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BookCategoryComponent } from './book-category/book-category.component';
-import { BookCategoryResolver } from './book-category/book-category.resolver';
+import { BookCategoryResolver } from './resolver/book-category.resolver';
 import { BorrowedBooksComponent } from './borrowed-books/borrowed-books.component';
-import { BorrowedBooksResolver } from './borrowed-books/borrowed-books.resolver';
+import { BorrowedBooksResolver } from './resolver/borrowed-books.resolver';
 import { IssueBooksComponent } from './issue-books/issue-books.component';
 import { PendingBooksComponent } from './pending-books/pending-books.component';
-import { PendingBooksResolver } from './pending-books/pending-books.resolver';
+import { PendingBooksResolver } from './resolver/pending-books.resolver';
 import { RenewBooksComponent } from './renew-books/renew-books.component';
 import { SearchBookComponent } from './search-book/search-book.component';
-import { StaffResolver } from './search/staff.resolver';
+import { StaffResolver } from './resolver/staff.resolver';
+import { CategoryResolver } from './resolver/category.resolver';
 
 const routes: Routes = [
     {
         path:"search-book",
-        component:SearchBookComponent
+        component:SearchBookComponent,
+        resolve:{
+            categ:CategoryResolver
+        }
     },
     {
         path:"borrowed-books",
@@ -34,7 +38,8 @@ const routes: Routes = [
         path:"issue-books",
         component:IssueBooksComponent,
         resolve:{
-            data:StaffResolver
+            data:StaffResolver,
+            categ:CategoryResolver
         }
     },
     {

@@ -14,6 +14,7 @@ export class IssueBooksComponent implements OnInit {
     value_change:any;
     
     options:any[] = [];
+    category:any[] = [];
     selected:any = { name:"", value:0 };
 
     constructor(
@@ -23,6 +24,9 @@ export class IssueBooksComponent implements OnInit {
             this.activatedRoute.data.subscribe(data => {
                 this.options.push({name:"Select Staff", value:0});
                 this.options = this.options.concat(data["data"]);
+
+                this.category.push({name:"Book Category", value:""});
+                this.category = this.category.concat(data["categ"]);
             });
         }
 
@@ -31,6 +35,10 @@ export class IssueBooksComponent implements OnInit {
             type:"issue-book",
             options:{
                 list: this.options,
+                selected: 0
+            },
+            categ:{
+                list: this.category,
                 selected: 0
             }
         }

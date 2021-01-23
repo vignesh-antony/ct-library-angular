@@ -50,6 +50,13 @@ routes.post('/return-books',(req, res) => {
     })
 });
 
+routes.get('/get-category',(req, res) => {
+    db.getCategory()
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
 routes.get('/book-category',(req, res) => {
     db.getBookCategory()
     .then((value)=>{

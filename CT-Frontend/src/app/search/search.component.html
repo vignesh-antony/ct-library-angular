@@ -14,11 +14,12 @@
             <span class="text">Book Title</span>
             <div class="filter-box"></div>
         </div>
-        <div class="input-wrap">
-            <input type="text" [(ngModel)]="category" required autocomplete="off">
-            <span class="text">Book Category</span>
-            <div class="filter-box"></div>
-        </div>
+        <form-select 
+            *ngIf="conf.categ"
+            [options]="conf.categ"
+            [reset]="resetValue" 
+            (selectValue)="updateCategValue($event)">
+        </form-select>
         <div class="input-wrap">
             <input type="text" [(ngModel)]="author" required autocomplete="off">
             <span class="text">Book Author</span>

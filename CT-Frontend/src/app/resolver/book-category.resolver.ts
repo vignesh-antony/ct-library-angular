@@ -5,14 +5,14 @@ import {
     ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { BorrowedBooksService } from './borrowed-books.service';
+import { BookCategoryService } from '../book-category/book-category.service';
 
 @Injectable({
     providedIn: 'root'
 })
-export class BorrowedBooksResolver implements Resolve<any> {
-    constructor(private borrowService:BorrowedBooksService){ }
+export class BookCategoryResolver implements Resolve<any> {
+    constructor(private categService:BookCategoryService) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        return this.borrowService.getBorrowedBooks();
+        return this.categService.getBookCategory();
     }
 }

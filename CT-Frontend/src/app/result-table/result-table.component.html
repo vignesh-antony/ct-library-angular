@@ -50,7 +50,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let book of bookList">
-                <td>{{ getBookID(book.bCategory, book.bID) }}</td>
+                <td>{{ getBookID(book.cID, book.bID) }}</td>
                 <td>{{ book.bName }}</td>
                 <td>{{ book.bAuthor }}</td>
                 <td>{{ book.bPublish }}</td>
@@ -86,7 +86,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let book of bookList">
-                <td>{{ getBookID(book.bCategory, book.bID) }}</td>
+                <td>{{ getBookID(book.cID, book.bID) }}</td>
                 <td>
                     <span class="r-title">{{ book.bName }}</span>
                     <span class="r-author">{{ book.bAuthor }}</span>

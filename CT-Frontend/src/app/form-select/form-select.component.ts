@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class FormSelectComponent implements OnInit {
 
     @Input() options:any;
+    @Input() reset:boolean;
     @Output() selectValue = new EventEmitter<any>();
 
     dropdown:boolean;
@@ -26,11 +27,17 @@ export class FormSelectComponent implements OnInit {
         this.selectValue.emit(option);
         this.toggleDropDown();
     }
+    resetValue(){
+        this.optionList.selected = 0;
+        this.current_value = this.optionList.list[0].name;
+        this.reset = false;
+    }
     ngOnInit(): void {
         this.optionList = this.options;
         this.current_value = this.optionList.list[this.optionList.selected].name;
     }
     ngOnChanges(){
         this.optionList = this.options;
+        if(this.reset == true) this.resetValue();
     }
 }

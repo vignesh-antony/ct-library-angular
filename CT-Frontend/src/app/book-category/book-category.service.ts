@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class BookCategoryService {
 
     constructor(private http:HttpClient) { }
+    getCategory():Observable<any>{
+        return this.http.get("http://localhost:3000/get-category");
+    }
     getBookCategory():Observable<any>{
         return this.http.get("http://localhost:3000/book-category");
     }

@@ -16,37 +16,52 @@ export class SearchComponent implements OnInit {
 
     conf:any;
     title:string;
-    category:string;
     author:string;
     publisher:string;
     year:string;
+    category:string = "";
 
     options:any;
     selectValue:any = 0;
+    resetValue:boolean;
 
     constructor(private searchService:SearchService, private alertService:AlertBoxService) { 
         this.title = this.category = this.author = this.publisher = this.year = "";
+        this.resetValue = false;
     }
     updateSelectValue(data:any){
         this.selectValue = data;
         this.selected.emit(data);
     }
+    updateCategValue(data:any){
+        this.category = data.value;
+    }
     resetFields(){
         this.title = this.category = this.author = this.publisher = this.year = "";
+        this.resetValue = true;
     }
     getValue(data:string){
         return "%"+data+"%";
     }
     searchBook(){
-        this.searchService.getBooks({
-            title: this.getValue(this.title),
-            category: this.getValue(this.category),
-            author: this.getValue(this.author),
-            publisher: this.getValue(this.publisher),
-            year: this.getValue(this.year)
-        }).subscribe(data => {
-            this.dataFound.emit(data);
-        });
+        if(this.title != "" || this.author != "" || this.category != "" || this.publisher != "" || this.year != ""){
+            this.searchService.getBooks({
+                title: this.getValue(this.title),
+                category: this.getValue(this.category),
+                author: this.getValue(this.author),
+                publisher: this.getValue(this.publisher),
+                year: this.getValue(this.year)
+            }).subscribe(data => {
+                this.dataFound.emit(data);
+            });
+        }
+        else{
+            this.alertService.showAlertBox({
+                status:"Warning",
+                message:"Please fill in atleast one field",
+                description:"Please provide at least one value for filtering!"
+            });
+        }
     }
     viewBook(){
         if(this.selectValue.value != 0){

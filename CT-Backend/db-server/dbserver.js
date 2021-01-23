@@ -111,6 +111,10 @@ class DBServer{
         let query = "SELECT `ID` as value, `Name` as name FROM `staff` NATURAL JOIN `stafflist` WHERE `type` = 0";
         return this.getData(query, []);
     }
+    async getCategory(){
+        let query = "SELECT `cID` as value, CONCAT(`cID`,' - ',`cName`) as name FROM `bookcateg`";
+        return this.getData(query, []);
+    }
     async getBorrowedBooks(id){
         let query = "SELECT * from `book` NATURAL JOIN `booklist` where `ID` = ? ORDER BY `timeIn` DESC";
         return this.getData(query,[id]);
