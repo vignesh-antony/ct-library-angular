@@ -25,7 +25,8 @@ export class SearchBookComponent implements OnInit {
             categ:{
                 list: this.category,
                 selected: 0
-            }
+            },
+            button:"Search Books"
         }
         return config;
     }

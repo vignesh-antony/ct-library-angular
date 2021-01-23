@@ -39,14 +39,8 @@
     <button 
         class="button" 
         (click)="searchBook()" 
-        *ngIf="conf.type == 'search-book'">
-        Search Books
-    </button>
-    <button 
-        class="button" 
-        (click)="searchBook()" 
-        *ngIf="conf.type == 'issue-book'">
-        Check Availability
+        *ngIf="conf.type != 'renew-book'">
+        {{ conf.button }}
     </button>
     <button 
         class="renew-button" 

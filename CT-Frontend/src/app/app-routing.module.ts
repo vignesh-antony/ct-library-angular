@@ -11,6 +11,7 @@ import { RenewBooksComponent } from './renew-books/renew-books.component';
 import { SearchBookComponent } from './search-book/search-book.component';
 import { StaffResolver } from './resolver/staff.resolver';
 import { CategoryResolver } from './resolver/category.resolver';
+import { ManageBooksComponent } from './manage-books/manage-books.component';
 
 const routes: Routes = [
     {
@@ -54,6 +55,13 @@ const routes: Routes = [
         component:BookCategoryComponent,
         resolve:{
             data:BookCategoryResolver
+        }
+    },
+    {
+        path:"manage-books",
+        component:ManageBooksComponent,
+        resolve:{
+            categ:CategoryResolver
         }
     }
 ];

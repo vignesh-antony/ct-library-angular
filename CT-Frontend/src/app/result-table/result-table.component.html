@@ -32,12 +32,20 @@
         <thead>
             <th class="b-id">ID</th>
             <th class="b-title">Book Title</th>
-            <th class="b-auth">Author</th>
-            <th class="b-pub">Publications</th>
+            <th class="b-auth" [class.manage-auth]="conf.type == 'manage-book'">Author</th>
+            <th class="b-pub" [class.manage-auth]="conf.type == 'manage-book'">Publications</th>
             <th class="b-year">Year</th>
             <th class="stock" 
-                *ngIf="conf.type == 'issue-book'">
+                *ngIf="conf.type != 'search-book'">
                 Stock
+            </th>
+            <th class="stock" 
+                *ngIf="conf.type == 'manage-book'">
+                Edit
+            </th>
+            <th class="stock" 
+                *ngIf="conf.type == 'manage-book'">
+                Delete
             </th>
             <th class="stock" 
                 *ngIf="conf.type == 'issue-book'">
@@ -56,7 +64,7 @@
                 <td>{{ book.bPublish }}</td>
                 <td>{{ book.bYear }}</td>
                 <td 
-                    *ngIf="conf.type == 'issue-book'" 
+                    *ngIf="conf.type != 'search-book'" 
                     [ngClass]="(book.bCopy == 0) ? 'stock-unavail' : 'stock-avail'">
                     {{ book.bCopy }}
                 </td>
@@ -67,6 +75,12 @@
                         *ngIf="book.bCopy != 0"
                         (click)="issue(book.bID)">Issue</button>
                     <button class="issue-button issued" *ngIf="book.bCopy == 0">Taken</button>
+                </td>
+                <td *ngIf="conf.type == 'manage-book'">
+                    <span class="edit"></span>
+                </td>
+                <td *ngIf="conf.type == 'manage-book'">
+                    <span class="delete"></span>
                 </td>
                 <td 
                     *ngIf="conf.type == 'search-book'">

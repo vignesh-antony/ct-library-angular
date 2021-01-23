@@ -40,7 +40,8 @@ export class IssueBooksComponent implements OnInit {
             categ:{
                 list: this.category,
                 selected: 0
-            }
+            },
+            button: "Check Availability"
         }
         return config;
     }

@@ -18,6 +18,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { RenewBooksComponent } from './renew-books/renew-books.component';
 import { BookCategoryComponent } from './book-category/book-category.component';
 import { PopupComponent } from './popup/popup.component';
+import { ManageBooksComponent } from './manage-books/manage-books.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { PopupComponent } from './popup/popup.component';
     AlertBoxComponent,
     RenewBooksComponent,
     BookCategoryComponent,
-    PopupComponent
+    PopupComponent,
+    ManageBooksComponent
   ],
   imports: [
     BrowserModule,

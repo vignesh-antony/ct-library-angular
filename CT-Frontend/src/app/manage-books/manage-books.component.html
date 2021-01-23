@@ -1,0 +1,18 @@
+<div class="main">
+    <section class="side-bar manage">
+        <h2>
+            <div class="top-content">
+                <span class="top-count">Manage Books</span><hr>
+                <span class="note">
+                You can <b>insert</b> new book by clicking on <b>Add New Book</b> button. And, you can also <b>edit, delete</b> existing books.
+                </span>
+            </div>
+            <span class="icon search manage-icon"></span>
+        </h2><hr>
+        <button class="add-button">+ Add New Book</button><br>
+    </section>
+    <search-filter [config]="getConfig()" (dataFound)="setResultData($event)"></search-filter>
+</div>
+<div class="result-table">
+    <result-table *ngIf="result && result.length" [result]="result" [config]="getConfig()"></result-table>
+</div>
