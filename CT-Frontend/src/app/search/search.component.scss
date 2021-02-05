@@ -18,7 +18,11 @@ input:-webkit-autofill:active{
     transition: 0.2s;
 
 }
-.input-wrap input[type=text]{
+.input-wrap textarea{
+    resize: vertical;
+}
+.input-wrap input[type=text],
+.input-wrap textarea{
     border: 1.15px solid gray;
     border-radius: 3px;
     padding: 0.6em;
@@ -28,11 +32,15 @@ input:-webkit-autofill:active{
     transition: 0.2s;
 }
 .input-wrap input[type=text]:focus,
-.input-wrap input[type=text]:valid{
+.input-wrap input[type=text]:valid,
+.input-wrap textarea:focus,
+.input-wrap textarea:valid{
     border: 1.15px solid #196fb9;
 }
 .input-wrap input[type=text]:focus ~ .text,
-.input-wrap input[type=text]:valid ~ .text{
+.input-wrap input[type=text]:valid ~ .text,
+.input-wrap textarea:focus ~ .text,
+.input-wrap textarea:valid ~ .text{
     font-size: 0.7em;
     letter-spacing: 1px;
     top: 0.8em;

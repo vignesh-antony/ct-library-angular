@@ -4,6 +4,7 @@
     background-color: rgba(0,0,0,0.5);
     position: fixed;
     top: 0;
+    left: 0;
     display: none;
     justify-content: center;
     align-items: center;
@@ -32,6 +33,9 @@
         margin-top: 0em;
         opacity: 1;
     }
+}
+.form-select{
+    margin: 1em 0;
 }
 .button-wrap{
     align-self: flex-start;

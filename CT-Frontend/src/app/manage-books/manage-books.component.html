@@ -14,5 +14,17 @@
     <search-filter [config]="getConfig()" (dataFound)="setResultData($event)"></search-filter>
 </div>
 <div class="result-table">
-    <result-table *ngIf="result && result.length" [result]="result" [config]="getConfig()"></result-table>
+    <result-table 
+    *ngIf="result && result.length" 
+    [result]="result" 
+    [config]="getConfig()"
+    (editBook)="showPopup($event)"></result-table>
 </div>
+<popup 
+    *ngIf="modalView"
+    [config]="getPopupConfig()"
+    [popup]="modalView"
+    [popup_value]="value"
+    (hideView)="closePopup($event)"
+    (modalData)="postData($event)">
+</popup>

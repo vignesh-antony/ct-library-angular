@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { config } from 'process';
 
 @Component({
     selector: 'popup',
@@ -16,12 +15,18 @@ export class PopupComponent implements OnInit {
     
     data:any = {};
     input:any[] = [];
+    select_value:any = "";
     view:boolean;
 
     constructor() { }
     setConfig(){
+        this.input = [];
+
         for(let i = 0; i < this.config.fields.length; i++){
-            if(this.popup_value) this.input.push(this.popup_value[i]);
+            if(this.popup_value[i]) {
+                this.input.push(this.popup_value[i]);
+                if(this.config.fields[i].select) this.select_value = this.popup_value[i];
+            }
             else this.input.push("");    
         }
         return this.config;
@@ -34,12 +39,18 @@ export class PopupComponent implements OnInit {
     }
     postData(){
         let value = {};
+        
         this.config.fields.forEach((field:any, i:any) => {
-            value[field.code] = this.input[i];
+            if(field.select) value[field.code] = this.select_value;
+            else value[field.code] = this.input[i];
         });
+
         value["prev"] = this.popup_value[0];
-        console.log(value);
         this.modalData.emit(value);
+    }
+    updateSelectValue(data:any){
+        console.log(data);
+        this.select_value = data.value;
     }
     ngOnInit(): void {
         this.data = this.setConfig(); 

@@ -1,4 +1,4 @@
-<div class="select-box">
+<div class="select-box" (click)="$event.stopPropagation()">
     <div class="selected" (click)="toggleDropDown()">
         <span class="text">{{ current_value }}</span>
         <span class="select-mark" [ngClass]="{ 'select-rot': dropdown }"></span>

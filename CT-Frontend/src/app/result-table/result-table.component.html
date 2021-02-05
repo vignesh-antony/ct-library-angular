@@ -77,7 +77,10 @@
                     <button class="issue-button issued" *ngIf="book.bCopy == 0">Taken</button>
                 </td>
                 <td *ngIf="conf.type == 'manage-book'">
-                    <span class="edit"></span>
+                    <span 
+                        class="edit" 
+                        (click)="edit(book)">
+                    </span>
                 </td>
                 <td *ngIf="conf.type == 'manage-book'">
                     <span class="delete"></span>

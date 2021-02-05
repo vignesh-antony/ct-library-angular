@@ -8,8 +8,16 @@
             </div>
         </h3>
         <div class="input-wrap" *ngFor="let field of data.fields; let i = index">
-            <input type="text" [(ngModel)]="input[i]" required>
-            <span class="text">{{ field.name }}</span>
+            <ng-container *ngIf="!field.hidden">
+                <input type="text" *ngIf="!field.textarea" [(ngModel)]="input[i]" required>
+                <textarea rows="5" *ngIf="field.textarea" [(ngModel)]="input[i]" required></textarea>
+                <span class="text">{{ field.name }}</span>
+            </ng-container>
+            <form-select 
+                *ngIf="field.select"
+                [options]="field.select_value" 
+                (selectValue)="updateSelectValue($event)">
+            </form-select>
         </div>
         <div class="button-wrap">
             <button class="pop-button" (click)="postData()">{{ data.button }}</button>

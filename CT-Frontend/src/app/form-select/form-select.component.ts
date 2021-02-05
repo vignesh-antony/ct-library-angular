@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'form-select',
@@ -15,8 +15,12 @@ export class FormSelectComponent implements OnInit {
     optionList:any;
     current_value:string;
     
-    constructor() { }
-
+    constructor() { 
+        
+    }
+    @HostListener('document:click', ['$event']) onDocumentClick(event) {
+        this.dropdown = false;
+    }
     toggleDropDown(){
         this.dropdown = !this.dropdown;
     }
