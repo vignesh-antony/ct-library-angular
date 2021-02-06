@@ -50,6 +50,27 @@ routes.post('/return-books',(req, res) => {
     })
 });
 
+routes.post('/add-books',(req, res) => {
+    db.addBooks(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.post('/update-books',(req, res) => {
+    db.updateBooks(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+routes.post('/delete-books',(req, res) => {
+    db.deleteBooks(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
 routes.get('/get-category',(req, res) => {
     db.getCategory()
     .then((value)=>{

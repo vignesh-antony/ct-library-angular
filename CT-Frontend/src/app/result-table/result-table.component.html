@@ -83,7 +83,7 @@
                     </span>
                 </td>
                 <td *ngIf="conf.type == 'manage-book'">
-                    <span class="delete"></span>
+                    <span class="delete" (click)="delete(book.bID)"></span>
                 </td>
                 <td 
                     *ngIf="conf.type == 'search-book'">

@@ -23,6 +23,26 @@ class DBServer{
                 message:"Book Returned Successfully",
                 description:"The book has been successfully returned to the library."
             },
+            "add_success":{
+                status:"Success",
+                message:"Books Added Successfully",
+                description:"The book details have been successfully added."
+            },
+            "update_success":{
+                status:"Success",
+                message:"Book Updated Successfully",
+                description:"The book details have been successfully updated."
+            },
+            "delete_borrow":{
+                status:"Error",
+                message:"Book Not Deleted",
+                description:"Books which are borrowed by the staff cannot be deleted."
+            },
+            "delete_success":{
+                status:"Success",
+                message:"Book Deleted Successfully",
+                description:"The book has been successfully removed from the library."
+            },
             "max_limit_reached":{ 
                 status:"Warning", 
                 message:"Maximum book count reached", 
@@ -184,13 +204,69 @@ class DBServer{
     }
     async returnBooks(data){
         let entry = await this.removeEntry(data.s_id, data.b_id);
-        if(entry && !entry.status != 'Error'){
+        if(entry && entry.status != 'Error'){
             let update = await this.increaseBookCount(data.b_id);
             
             if(update) return this.response["return_success"];
             else return this.response["error"];
         }
         else return this.response["error"];
+    }
+    async insertBook(data,i_query){
+        let query = "INSERT INTO `book`(`cID`,`bName`,`bAuthor`,`bPublish`,`bYear`,`bCopy`) VALUES "+i_query;
+        return this.getData(query,data);
+    }
+    async addNewBooks(data){
+        let i_query = "";
+        let params = [];
+
+        for(let i = data.book_count; i < data.bCopy; i++){
+            i_query += "(?, ?, ?, ?, ?, ?),";
+            params.push(data.cID, data.bName, data.bAuthor, data.bPublish, data.bYear, 1);
+        }
+        i_query = i_query.slice(0, -1);
+        
+        return this.insertBook(params, i_query);
+    }
+    async updateOldBook(data){
+        let query = "UPDATE `book` SET `cID` = ?, `bName` = ?, `bAuthor` = ?, `bPublish` = ?, `bYear` = ? WHERE `bID` = ?";
+        return this.getData(query, [data.cID, data.bName, data.bAuthor, data.bPublish, data.bYear, data.bID]);
+    }
+    async updateBooks(data){
+        let res = { status: "" };
+
+        if(+data.bCopy > data.book_count) 
+            res = await this.addNewBooks(data);
+
+        if(res && res.status != "Error") 
+            res = await this.updateOldBook(data);
+
+        if(res == undefined || res.status == "Error"){
+            return this.response["error"];
+        }
+        else return this.response["update_success"];
+    }
+    async deleteCheck(data){
+        let query = "SELECT `ID` FROM `booklist` WHERE `bID` = ?";
+        return this.getData(query, [data]);
+    }
+    async deleteBooks(data){
+        let check = await this.deleteCheck(data.bID);
+        if(check && check.status != "Error" && check.length == 0){
+            let query = "DELETE FROM `book` WHERE `bID` = ?";
+            let res = await this.getData(query, [data.bID]);
+
+            if(res && res.status != "Error") return this.response["delete_success"]; 
+            else return res;
+        }
+        else return this.response["delete_borrow"];
+    }
+    async addBooks(data){
+        let res = await this.addNewBooks(data);
+        if(res == undefined || res.status == "Error"){
+            return this.response["error"];
+        }
+        else return this.response["add_success"];
     }
 }
 

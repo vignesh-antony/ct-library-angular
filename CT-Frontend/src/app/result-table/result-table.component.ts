@@ -16,6 +16,7 @@ export class ResultTableComponent implements OnInit {
     @Output() renewBook = new EventEmitter<any>();
     @Output() returnBook = new EventEmitter<any>();
     @Output() editBook = new EventEmitter<any>();
+    @Output() deleteBook = new EventEmitter<any>();
 
     bookList:any;
     conf:any;
@@ -36,6 +37,9 @@ export class ResultTableComponent implements OnInit {
     }
     edit(book:any){
         this.editBook.emit(book);
+    }
+    delete(id:any){
+        this.deleteBook.emit(id);
     }
     getDateTime(date:string){
         let d = moment(date);

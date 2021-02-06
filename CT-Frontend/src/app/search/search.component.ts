@@ -85,7 +85,10 @@ export class SearchComponent implements OnInit {
         this.conf = this.config;
         if(this.value_change == true) {
             if(this.conf.type == 'renew-book') this.viewBook();
-            else this.searchBook();
+            else {
+                if(this.title != "" || this.author != "" || this.category != "" || this.publisher != "" || this.year != "")
+                    this.searchBook();
+            }
             this.value_change = false;
         }
     }

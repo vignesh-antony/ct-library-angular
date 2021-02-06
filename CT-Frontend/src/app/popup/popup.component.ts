@@ -17,8 +17,11 @@ export class PopupComponent implements OnInit {
     input:any[] = [];
     select_value:any = "";
     view:boolean;
+    resetValue:boolean;
 
-    constructor() { }
+    constructor() { 
+        this.resetValue = false;
+    }
     setConfig(){
         this.input = [];
 
@@ -33,6 +36,8 @@ export class PopupComponent implements OnInit {
     }
     resetModal(){
         for(let i = 0; i < this.input.length; i++) this.input[i] = "";
+        this.select_value = "";
+        this.resetValue = true;
     }
     closeModal(){
         this.hideView.emit(false);
@@ -49,7 +54,6 @@ export class PopupComponent implements OnInit {
         this.modalData.emit(value);
     }
     updateSelectValue(data:any){
-        console.log(data);
         this.select_value = data.value;
     }
     ngOnInit(): void {

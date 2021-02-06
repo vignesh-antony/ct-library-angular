@@ -15,7 +15,8 @@
             </ng-container>
             <form-select 
                 *ngIf="field.select"
-                [options]="field.select_value" 
+                [options]="field.select_value"
+                [reset]="resetValue" 
                 (selectValue)="updateSelectValue($event)">
             </form-select>
         </div>

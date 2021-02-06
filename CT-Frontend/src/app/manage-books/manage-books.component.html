@@ -9,16 +9,21 @@
             </div>
             <span class="icon search manage-icon"></span>
         </h2><hr>
-        <button class="add-button">+ Add New Book</button><br>
+        <button class="add-button" (click)="addBook()">+ Add New Book</button><br>
     </section>
-    <search-filter [config]="getConfig()" (dataFound)="setResultData($event)"></search-filter>
+    <search-filter 
+        [config]="getConfig()"
+        [value_change]="value_change" 
+        (dataFound)="setResultData($event)">
+    </search-filter>
 </div>
 <div class="result-table">
     <result-table 
     *ngIf="result && result.length" 
     [result]="result" 
     [config]="getConfig()"
-    (editBook)="showPopup($event)"></result-table>
+    (editBook)="editBook($event)"
+    (deleteBook)="deleteBook($event)"></result-table>
 </div>
 <popup 
     *ngIf="modalView"

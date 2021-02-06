@@ -19,9 +19,9 @@ export class AlertBoxService {
     }
     
     hideAlert(){
-        this.notifyChange.next([!this.notify,{}]);    
+        this.notifyChange.next([false,{}]);    
     }
     showAlertBox(data:any){
-        this.notifyChange.next([!this.notify, data]);
+        this.notifyChange.next([true, data]);
     }
 }
