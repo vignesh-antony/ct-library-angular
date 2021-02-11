@@ -38,8 +38,8 @@ export class ResultTableComponent implements OnInit {
     edit(book:any){
         this.editBook.emit(book);
     }
-    delete(id:any){
-        this.deleteBook.emit(id);
+    delete(book:any){
+        this.deleteBook.emit(book);
     }
     getDateTime(date:string){
         let d = moment(date);

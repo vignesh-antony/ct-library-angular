@@ -14,6 +14,9 @@ export class BookCategoryService {
     getBookCategory():Observable<any>{
         return this.http.get("http://localhost:3000/book-category");
     }
+    getBookBorrowCategory():Observable<any>{
+        return this.http.get("http://localhost:3000/book-borrow-category");
+    }
     setBookCategory(data:any):Observable<any>{
         return this.http.post("http://localhost:3000/set-category",data);
     }

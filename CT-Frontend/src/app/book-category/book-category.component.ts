@@ -6,20 +6,24 @@ import { BookCategoryService } from './book-category.service';
 @Component({
     selector: 'app-book-category',
     templateUrl: './book-category.component.html',
-    styleUrls: ['./book-category.component.scss']
+    styleUrls: ['../search-book/search-book.component.scss','./book-category.component.scss']
 })
 export class BookCategoryComponent implements OnInit {
 
     category:any = [];
+    book_borrow:any = [];
+
     modalView:boolean = false;
     value:any = [];
+    error:any;
 
     constructor(
         private activatedRoute:ActivatedRoute, 
         private categService:BookCategoryService,
         private alertService:AlertBoxService) { 
         this.activatedRoute.data.subscribe(data => {
-            this.category = data["data"];
+            this.category = data["data"]["categ"];
+            this.book_borrow = data["data"]["borrow"];
         })
     }
     private config = {
@@ -53,7 +57,10 @@ export class BookCategoryComponent implements OnInit {
         this.modalView = false;
     }
     postData(value:any){
-        if(this.value.length){
+        if(!value.cID || !value.cName){
+            this.error = "Please fill-in both Category ID and Name!";
+        }
+        else if(this.value.length){
             this.categService.updateBookCategory(value).subscribe(data => {
                 this.alertService.showAlertBox(data);
                 if(data.status == 'Success'){
@@ -72,8 +79,8 @@ export class BookCategoryComponent implements OnInit {
             });
         }
     }
-    deleteCateg(id:any){
-        this.categService.deleteBookCategory({cID:id}).subscribe(data => {
+    deleteCateg(data:any){
+        this.categService.deleteBookCategory(data).subscribe(data => {
             this.alertService.showAlertBox(data);
             if(data.status == 'Success'){
                 this.getCategory();

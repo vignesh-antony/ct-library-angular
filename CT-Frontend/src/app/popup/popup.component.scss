@@ -114,3 +114,15 @@
 .close::after{
     transform: rotate(-45deg);
 }
+.error-message{
+    width: 100%;
+    margin: 0.5em 0;
+    padding: 0.25em 0.5em 0.25em 0.75em;
+    font-size: 0.85em;
+    background-color: #ffe8e8;
+    border: 1px solid #ff8787;
+    color: #640b0b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

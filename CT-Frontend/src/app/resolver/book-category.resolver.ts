@@ -13,6 +13,6 @@ import { BookCategoryService } from '../book-category/book-category.service';
 export class BookCategoryResolver implements Resolve<any> {
     constructor(private categService:BookCategoryService) {}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        return this.categService.getBookCategory();
+        return this.categService.getBookBorrowCategory();
     }
 }

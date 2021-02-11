@@ -20,6 +20,12 @@
                 (selectValue)="updateSelectValue($event)">
             </form-select>
         </div>
+        <div class="error-message" *ngIf="error">
+            <span>{{ error }}</span>
+            <div class="close-wrap">
+                <span class="close" (click)="closeError()"></span>
+            </div>
+        </div>
         <div class="button-wrap">
             <button class="pop-button" (click)="postData()">{{ data.button }}</button>
             <button class="pop-button pop-reset" (click)="resetModal()">Reset</button>

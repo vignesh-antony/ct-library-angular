@@ -30,6 +30,7 @@
     [config]="getPopupConfig()"
     [popup]="modalView"
     [popup_value]="value"
+    [(error)]="error"
     (hideView)="closePopup($event)"
     (modalData)="postData($event)">
 </popup>

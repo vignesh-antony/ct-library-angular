@@ -92,6 +92,12 @@ class DBServer{
             return Promise.resolve(this.response["error"]);
         }
     }
+    async insertLog(data){
+        let cont = JSON.stringify(data.content);
+        
+        let query = "INSERT INTO `logs`(`type_ref`,`content`,`logTime`) VALUES(?, ?, ?)";
+        return this.getData(query, [data.type, cont, data.time]);
+    }
     async getBookList(data){
         let query = "SELECT * from `book` WHERE `bName` LIKE ? AND `cID` LIKE ? AND `bAuthor` LIKE ? AND `bPublish` LIKE ? AND `bYear` LIKE ? ORDER BY `bName`";
         return this.getData(query,[data.title, data.category, data.author, data.publisher, data.year]);
@@ -100,11 +106,28 @@ class DBServer{
         let query = "SELECT `cID`, `cName`, COUNT(`bID`) as bcount FROM `bookcateg` LEFT OUTER JOIN `book` USING(`cID`) GROUP BY `cID` ORDER BY `bookcateg`.`cID`";
         return this.getData(query,[]);
     }
+    async getBookBorrowCategory(){
+        let categ = await this.getBookCategory();
+
+        let query = "SELECT `cID`, `cName`, COUNT(`bookborrow`.`bID`) as bcount FROM `bookcateg` NATURAL JOIN (SELECT `bID`, `cID` FROM `book` NATURAL JOIN `booklist`) as `bookborrow` GROUP BY `cID` ORDER BY `bcount` DESC LIMIT 0,10";
+        let borrow = await this.getData(query, []);
+
+        return {"borrow":borrow,"categ":categ};
+    }
     async setBookCategory(data){
         let query = "INSERT INTO `bookcateg`(`cID`,`cName`) VALUES(?, ?)";
         let result = await this.getData(query, [data.cID, data.cName]);
 
         if(result && result.status != "Error"){
+            await this.insertLog({
+                type:6,
+                content:{
+                    message:"Book Category has been inserted",
+                    title:data.cName,
+                    categ:data.cID
+                },
+                time: new Date()
+            });
             return this.response["categ_success"];
         }
         else return this.response["categ_error"];
@@ -114,6 +137,15 @@ class DBServer{
         let result = await this.getData(query, [data.cID, data.cName, data.prev]);
 
         if(result && result.status != "Error"){
+            await this.insertLog({
+                type:7,
+                content:{
+                    message:"Book Category has been updated",
+                    title:data.cName,
+                    categ:data.cID
+                },
+                time: new Date()
+            });
             return this.response["categ_update"];
         }
         else return this.response["categ_error"];
@@ -123,6 +155,15 @@ class DBServer{
         let result = await this.getData(query, [data.cID]);
 
         if(result && result.status != "Error"){
+            await this.insertLog({
+                type:8,
+                content:{
+                    message:"Book Category has been deleted",
+                    title:data.cName,
+                    categ:data.cID
+                },
+                time: new Date()
+            });
             return this.response["categ_delete"];
         }
         else return this.response["categ_del_error"];
@@ -171,7 +212,20 @@ class DBServer{
             if(entry && entry.status != "Error"){
                 let update = await this.reduceBookCount(data.b_id);
                 
-                if(update) return this.response["issue_success"];
+                if(update) {
+                    await this.insertLog({
+                        type:9,
+                        content:{
+                            message:"Book has been issued to staff - " + data.s_name,
+                            title:data.b_name,
+                            sub_title:data.b_auth,
+                            id:data.b_id,
+                            categ:data.c_id
+                        },
+                        time: new Date()
+                    });
+                    return this.response["issue_success"];
+                }
                 else return this.response["error"];
             }
             else return this.response["error"];
@@ -189,7 +243,20 @@ class DBServer{
         let renewal = await this.getRenewalTime();
         if(renewal){
             let entry = await this.addRenewEntry(data.s_id, data.b_id, renewal[0]["config_value"]);
-            if(entry && entry.status != "Error") return this.response["renew_success"];
+            if(entry && entry.status != "Error") {
+                await this.insertLog({
+                    type:10,
+                    content:{
+                        message:"Book has been renewed for staff - " + data.s_name,
+                        title:data.b_name,
+                        sub_title:data.b_auth,
+                        id:data.b_id,
+                        categ:data.c_id
+                    },
+                    time: new Date()
+                });
+                return this.response["renew_success"];
+            }
             return this.response["error"];
         }
         else return this.response["error"];
@@ -207,7 +274,20 @@ class DBServer{
         if(entry && entry.status != 'Error'){
             let update = await this.increaseBookCount(data.b_id);
             
-            if(update) return this.response["return_success"];
+            if(update) {
+                await this.insertLog({
+                    type:11,
+                    content:{
+                        message:"Book has been returned from staff - " + data.s_name,
+                        title:data.b_name,
+                        sub_title:data.b_auth,
+                        id:data.b_id,
+                        categ:data.c_id
+                    },
+                    time: new Date()
+                });
+                return this.response["return_success"];
+            }
             else return this.response["error"];
         }
         else return this.response["error"];
@@ -235,16 +315,43 @@ class DBServer{
     async updateBooks(data){
         let res = { status: "" };
 
-        if(+data.bCopy > data.book_count) 
+        if(+data.bCopy > data.book_count){ 
             res = await this.addNewBooks(data);
+            if(res.status != "Error"){
+                await this.insertLog({
+                    type:3,
+                    content:{
+                        message:"Book has been inserted",
+                        title:data.bName,
+                        sub_title:data.bAuthor,
+                        count:data.bCopy
+                    },
+                    time: new Date()
+                });
+            }
+        }
 
-        if(res && res.status != "Error") 
+        if(res && res.status != "Error")
             res = await this.updateOldBook(data);
 
         if(res == undefined || res.status == "Error"){
             return this.response["error"];
         }
-        else return this.response["update_success"];
+        else {
+            await this.insertLog({
+                type:4,
+                content:{
+                    message:"Book has been updated",
+                    title:data.bName,
+                    sub_title:data.bAuthor,
+                    id:data.bID,
+                    categ:data.cID,
+                    count:1
+                },
+                time: new Date()
+            });
+            return this.response["update_success"];
+        }
     }
     async deleteCheck(data){
         let query = "SELECT `ID` FROM `booklist` WHERE `bID` = ?";
@@ -256,7 +363,21 @@ class DBServer{
             let query = "DELETE FROM `book` WHERE `bID` = ?";
             let res = await this.getData(query, [data.bID]);
 
-            if(res && res.status != "Error") return this.response["delete_success"]; 
+            if(res && res.status != "Error") {
+                await this.insertLog({
+                    type:5,
+                    content:{
+                        message:"Book has been deleted",
+                        title:data.bName,
+                        sub_title:data.bAuthor,
+                        id:data.bID,
+                        categ:data.cID,
+                        count:1
+                    },
+                    time: new Date()
+                });
+                return this.response["delete_success"];
+            } 
             else return res;
         }
         else return this.response["delete_borrow"];
@@ -266,7 +387,19 @@ class DBServer{
         if(res == undefined || res.status == "Error"){
             return this.response["error"];
         }
-        else return this.response["add_success"];
+        else {
+            await this.insertLog({
+                type:3,
+                content:{
+                    message:"Book has been inserted",
+                    title:data.bName,
+                    sub_title:data.bAuthor,
+                    count:data.bCopy
+                },
+                time: new Date()
+            });
+            return this.response["add_success"];
+        }
     }
 }
 

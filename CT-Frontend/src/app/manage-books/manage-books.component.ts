@@ -17,6 +17,7 @@ export class ManageBooksComponent implements OnInit {
     
     book_count:any = 0;
     value_change:any;
+    error:any;
 
     constructor(
         private activatedRoute:ActivatedRoute, 
@@ -88,32 +89,16 @@ export class ManageBooksComponent implements OnInit {
     }
     postData(data:any){
         if(data.bName == "" || data.bAuthor == ""){
-            this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Please Fill-in required fields",
-                description:"Please provide info about Book name and author."
-            });
+            this.error = "Please provide info about Book name and author.";
         }
         else if(data.cID == ""){
-            this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Please select category",
-                description:"The book category cannot be empty! Please select one."
-            });
+            this.error = "Please select category. The book category cannot be empty!";
         }
-        else if(isNaN(+data.bYear)){
-            this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Invalid Published Year",
-                description:"Please provide the published year of the book."
-            });
+        else if(isNaN(+data.bYear) || !(+data.bYear > 1000)){
+            this.error = "Please provide a valid published year for the book."
         }
         else if(data.bCopy == "" || (+data.bCopy != this.book_count && +data.bCopy <= 0)){
-            this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Invalid Book Count",
-                description:"Please provide the book count greater than zero."
-            });
+            this.error = "Please provide the book count greater than zero."
         }
         else{
             if(this.config.type == "update"){
@@ -201,7 +186,7 @@ export class ManageBooksComponent implements OnInit {
         }
     }
     deleteBook(data:any){
-        this.manageService.deleteBook({bID: data}).subscribe(data => {
+        this.manageService.deleteBook(data).subscribe(data => {
             this.alertBox.showAlertBox(data);
             this.value_change = true;
         })

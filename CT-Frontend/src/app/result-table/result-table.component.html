@@ -73,7 +73,7 @@
                     class="i-button">
                     <button class="issue-button" 
                         *ngIf="book.bCopy != 0"
-                        (click)="issue(book.bID)">Issue</button>
+                        (click)="issue(book)">Issue</button>
                     <button class="issue-button issued" *ngIf="book.bCopy == 0">Taken</button>
                 </td>
                 <td *ngIf="conf.type == 'manage-book'">
@@ -83,7 +83,7 @@
                     </span>
                 </td>
                 <td *ngIf="conf.type == 'manage-book'">
-                    <span class="delete" (click)="delete(book.bID)"></span>
+                    <span class="delete" (click)="delete(book)"></span>
                 </td>
                 <td 
                     *ngIf="conf.type == 'search-book'">
@@ -111,8 +111,8 @@
                 </td>
                 <td class="time" [innerHTML]="getDateTime(book.timeIn)"></td>
                 <td class="time" [innerHTML]="getDateTime(book.timeOut)" [class.expired]="checkDate(book.timeOut)"></td>
-                <td><button class="r-button" (click)="renew(book.bID)">Renew</button></td>
-                <td><button class="r-button return" (click)="return(book.bID)">Return</button></td>
+                <td><button class="r-button" (click)="renew(book)">Renew</button></td>
+                <td><button class="r-button return" (click)="return(book)">Return</button></td>
             </tr>
         </tbody>
     </table>

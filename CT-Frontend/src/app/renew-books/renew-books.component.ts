@@ -44,9 +44,16 @@ export class RenewBooksComponent implements OnInit {
     setSelectValue(id:any){
         this.selected = id;
     }
-    renewBook(id:any){
+    renewBook(data:any){
         if(this.selected.value != 0){
-            this.renewService.renewBooks({s_id:this.selected.value, b_id:id}).subscribe(data => {
+            this.renewService.renewBooks({
+                s_id:this.selected.value, 
+                s_name:this.selected.name ,
+                b_id:data.bID,
+                b_name:data.bName,
+                b_auth:data.bAuthor,
+                c_id:data.cID
+            }).subscribe(data => {
                 this.alertBox.showAlertBox(data);
                 this.value_change = true;
             });
@@ -59,9 +66,16 @@ export class RenewBooksComponent implements OnInit {
             });
         }
     }
-    returnBook(id:any){
+    returnBook(data:any){
         if(this.selected.value != 0){
-            this.renewService.returnBooks({s_id:this.selected.value, b_id:id}).subscribe(data => {
+            this.renewService.returnBooks({
+                s_id:this.selected.value, 
+                s_name:this.selected.name ,
+                b_id:data.bID,
+                b_name:data.bName,
+                b_auth:data.bAuthor,
+                c_id:data.cID
+            }).subscribe(data => {
                 this.alertBox.showAlertBox(data);
                 this.value_change = true;
             });

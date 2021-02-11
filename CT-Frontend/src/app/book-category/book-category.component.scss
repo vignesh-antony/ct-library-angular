@@ -1,8 +1,15 @@
-:host{
-    flex: 1;
+.book-categ{
+    flex-direction: column;
+    background-color: #e7f8ff;
 }
-.main{
-    width: 60%;
+.book-categ .top-content{
+    padding-bottom: 0.25em;
+}
+.categ-icon{
+    background-image: url("../../assets/svg/book-categ.svg");
+}
+.main-right{
+    flex: 1;
     margin: auto;
     padding: 1em;
 }
@@ -27,22 +34,24 @@
     margin-left: 1em;
 }
 .button{
-    padding: 0.5em 1.25em;
-    font-size: 0.8em;
-    font-weight: bold;
+    padding: 0.6em 1.25em;
+    font-size: 0.9em;
+    font-weight: 500;
     color: white;
     border: none;
-    border-radius: 3px;
-    background-color: #196fb8;
+    border-radius: 2px;
+    background-color: #22529b;
     transition: 0.2s;
     cursor: pointer;
+    &:hover{
+        background-color: #051e3b;
+    }
 }
-.button:hover{
-    background-color: #0f3e68;
-}
+
 .result-table{
     width: 100%;
     margin-top: 2em;
+    margin-bottom: 0;
     max-height: 75vh;
     overflow-y: scroll;
 }
@@ -93,4 +102,25 @@
 }
 .delete-icon:hover{
     background-color: rgba(250,0,0,0.25);
+}
+.bc-title{
+    margin-top: 0.5em;
+    padding: 1em;
+    color: gray;
+}
+.book-categ-borrow{
+    padding-bottom: 1em;
+    font-size: 0.9em;
+}
+.book-categ-borrow .result-borrow{
+    margin: 0 1em;
+    border: 1px solid gainsboro;
+    max-height: 57vh;
+    overflow: auto;
+}
+.result-borrow td{
+    border-color: gainsboro;
+}
+.result-borrow tr:nth-child(even){
+    background-color: whitesmoke;
 }

@@ -19,6 +19,7 @@ import { RenewBooksComponent } from './renew-books/renew-books.component';
 import { BookCategoryComponent } from './book-category/book-category.component';
 import { PopupComponent } from './popup/popup.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ManageBooksComponent } from './manage-books/manage-books.component';
     RenewBooksComponent,
     BookCategoryComponent,
     PopupComponent,
-    ManageBooksComponent
+    ManageBooksComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,

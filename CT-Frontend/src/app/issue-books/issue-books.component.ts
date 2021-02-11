@@ -52,9 +52,16 @@ export class IssueBooksComponent implements OnInit {
     setSelectValue(id:any){
         this.selected = id;
     }
-    issueBook(id:any){
+    issueBook(data:any){
         if(this.selected.value != 0){
-            this.issueService.issueBookToStaff({s_id:this.selected.value, b_id:id}).subscribe(data => {
+            this.issueService.issueBookToStaff({
+                    s_id:this.selected.value, 
+                    s_name:this.selected.name ,
+                    b_id:data.bID,
+                    b_name:data.bName,
+                    b_auth:data.bAuthor,
+                    c_id:data.cID
+                }).subscribe(data => {
                 this.alertBox.showAlertBox(data);
                 this.value_change = true;
             });

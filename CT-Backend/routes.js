@@ -85,6 +85,13 @@ routes.get('/book-category',(req, res) => {
     })
 });
 
+routes.get('/book-borrow-category',(req, res) => {
+    db.getBookBorrowCategory()
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
 routes.post('/set-category',(req, res) => {
     db.setBookCategory(req.body)
     .then((value)=>{

@@ -10,6 +10,10 @@ export class PopupComponent implements OnInit {
     @Input() config:any;
     @Input() popup:boolean;
     @Input() popup_value:any;
+
+    @Input() error:any;
+    @Output() errorChange = new EventEmitter<any>();
+    
     @Output() hideView = new EventEmitter<any>();
     @Output() modalData = new EventEmitter<any>();
     
@@ -37,10 +41,16 @@ export class PopupComponent implements OnInit {
     resetModal(){
         for(let i = 0; i < this.input.length; i++) this.input[i] = "";
         this.select_value = "";
+        
         this.resetValue = true;
+        this.closeError();
     }
     closeModal(){
         this.hideView.emit(false);
+        this.closeError();
+    }
+    closeError(){
+        this.errorChange.emit("");
     }
     postData(){
         let value = {};

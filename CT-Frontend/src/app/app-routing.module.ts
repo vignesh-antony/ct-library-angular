@@ -12,6 +12,7 @@ import { SearchBookComponent } from './search-book/search-book.component';
 import { StaffResolver } from './resolver/staff.resolver';
 import { CategoryResolver } from './resolver/category.resolver';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 const routes: Routes = [
     {
@@ -63,6 +64,10 @@ const routes: Routes = [
         resolve:{
             categ:CategoryResolver
         }
+    },
+    {
+        path:"transactions",
+        component:TransactionsComponent
     }
 ];
 
