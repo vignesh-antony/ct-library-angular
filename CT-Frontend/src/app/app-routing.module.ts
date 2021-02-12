@@ -13,6 +13,7 @@ import { StaffResolver } from './resolver/staff.resolver';
 import { CategoryResolver } from './resolver/category.resolver';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactionsResolver } from './resolver/transactions.resolver';
 
 const routes: Routes = [
     {
@@ -67,7 +68,11 @@ const routes: Routes = [
     },
     {
         path:"transactions",
-        component:TransactionsComponent
+        component:TransactionsComponent,
+        resolve:{
+            data:TransactionsResolver,
+            staff:StaffResolver
+        }
     }
 ];
 

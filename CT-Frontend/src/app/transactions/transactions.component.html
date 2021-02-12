@@ -1,3 +1,63 @@
 <div class="main">
-    
+    <section class="side-bar">
+        <h2>
+            <div class="top-content">
+                <span class="top-count">Book Transactions</span><hr>
+                <span class="note">
+                You can <b>check</b> the overall transactions that has occured so far. You can also filter the transactions using the below filter.
+                </span>
+            </div>
+            <span class="icon search"></span>
+        </h2><hr>
+    </section>
+    <div class="filter">
+        <h3>
+            <span>Search Filter</span>
+            <span class="icon reset" title="Reset"></span>
+        </h3>
+        <form-select 
+            *ngIf="staffs"
+            [options]="staffs" 
+            (selectValue)="updateStaff($event)">
+        </form-select>
+        <div class="input-wrap">
+            <input type="date" [(ngModel)]="start_date" required autocomplete="off">
+            <span class="text">Start Date</span>
+        </div>
+        <div class="input-wrap">
+            <input type="date" [(ngModel)]="end_date" required autocomplete="off">
+            <span class="text">End Date</span>
+        </div>
+        <button class="button" (click)="applyFilter()">Apply Filter</button> 
+    </div>
+</div>
+<div class="log-filter-wrap">
+    <h3 class="main-title">
+        <span class="icon"></span>
+        <span>Transaction History</span>
+        <input type="text" 
+            class="filter-field" 
+            spellcheck="false" 
+            autocomplete="off" 
+            placeholder="Search Transactions"
+        >
+    </h3>
+    <div class="log-record">
+        <div class="logs" *ngFor="let log of log_records">
+            <div class="l-info">
+                <b>
+                    <span>{{ log.content.message }}</span>
+                    <span class="b-count" title="Count" *ngIf="log.content.id">{{ log.content.categ + log.content.id }}</span>
+                </b>
+                <p>
+                    <span>{{ log.content.title }}</span>
+                    <span class="author">{{ log.content.sub_title }}</span>
+                </p>
+            </div>
+            <div class="l-time">
+                <b>{{ log.logTime.date }}</b>
+                <p>{{ log.logTime.time }}</p>
+            </div>
+        </div>
+    </div>
 </div>

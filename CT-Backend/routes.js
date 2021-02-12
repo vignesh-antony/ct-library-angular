@@ -113,4 +113,12 @@ routes.post('/delete-category',(req, res) => {
     })
 });
 
+routes.post('/transactions',(req, res) => {
+    db.getTransactions(req.body)
+    .then((value)=>{
+        res.send(value);
+    })
+});
+
+
 module.exports = routes;

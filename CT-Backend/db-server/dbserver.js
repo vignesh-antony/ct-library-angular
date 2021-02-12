@@ -94,9 +94,10 @@ class DBServer{
     }
     async insertLog(data){
         let cont = JSON.stringify(data.content);
-        
-        let query = "INSERT INTO `logs`(`type_ref`,`content`,`logTime`) VALUES(?, ?, ?)";
-        return this.getData(query, [data.type, cont, data.time]);
+        let s_id = (data.s_id) ? data.s_id : 0;
+
+        let query = "INSERT INTO `logs`(`sID`,`type_ref`,`content`,`logTime`) VALUES(?, ?, ?, ?)";
+        return this.getData(query, [s_id, data.type, cont, data.time]);
     }
     async getBookList(data){
         let query = "SELECT * from `book` WHERE `bName` LIKE ? AND `cID` LIKE ? AND `bAuthor` LIKE ? AND `bPublish` LIKE ? AND `bYear` LIKE ? ORDER BY `bName`";
@@ -222,7 +223,8 @@ class DBServer{
                             id:data.b_id,
                             categ:data.c_id
                         },
-                        time: new Date()
+                        time: new Date(),
+                        s_id:data.s_id
                     });
                     return this.response["issue_success"];
                 }
@@ -253,7 +255,8 @@ class DBServer{
                         id:data.b_id,
                         categ:data.c_id
                     },
-                    time: new Date()
+                    time: new Date(),
+                    s_id:data.s_id
                 });
                 return this.response["renew_success"];
             }
@@ -284,7 +287,8 @@ class DBServer{
                         id:data.b_id,
                         categ:data.c_id
                     },
-                    time: new Date()
+                    time: new Date(),
+                    s_id:data.s_id
                 });
                 return this.response["return_success"];
             }
@@ -400,6 +404,39 @@ class DBServer{
             });
             return this.response["add_success"];
         }
+    }
+    async getTransactions(data){
+        let query = "SELECT `type_ref`,`content`,`logTime` FROM `logs` ";
+        let params = [];
+
+        if(data != null && data.staff != undefined && 
+            (data.staff || data.start_date || data.end_date)){
+            query += "WHERE ";
+            
+            if(data.staff){
+                query += "`sID` = ? ";
+                params.push(data.staff);    
+            }
+            
+            if(data.staff && (data.start_date || data.end_date)) 
+                query += "AND ";
+            
+            if(data.start_date && data.end_date){
+                query += "DATE(`logTime`) BETWEEN ? AND ?"
+                params.push(data.start_date, data.end_date);
+            }
+            else if(data.start_date){
+                query += "DATE(`logTime`) >= ? ";
+                params.push(data.start_date);
+            }
+            else if(data.end_date){
+                query += "DATE(`logTime`) <= ? ";
+                params.push(data.end_date);
+            }
+        }
+        query += "ORDER BY `logTime` DESC LIMIT " + (data.start ? data.start : 0) + ", 12";
+        
+        return this.getData(query, params);
     }
 }
 
