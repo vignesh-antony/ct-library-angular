@@ -1,3 +1,7 @@
+.input-wrap input[type="text"],
+.input-wrap input[type="date"] {
+    margin: 0.75em 0;
+}
 .main-title {
     display: flex;
     justify-content: space-between;
@@ -20,6 +24,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
+    margin-bottom: 0.5em;
 }
 .logs {
     padding: 1em;
@@ -152,12 +157,13 @@
     font-size: 0.95em;
 }
 .log-icon {
-    width: 0.75em;
-    height: 0.75em;
+    width: 1em;
+    height: 1em;
     display: block;
     background-color: #62bd62;
     border-radius: 50%;
-    margin-left: 0.75em;
+    margin-left: auto;
+    margin-right: 0.25em;
 }
 .renew-log {
     background-color: #529bdb;
@@ -184,7 +190,7 @@
     border-color: #8047ca;
     border-left-width: 4px;
 }
-.log-staff {
+.log-categ {
     border-color: #e21bd2;
     border-left-width: 4px;
 }
@@ -207,4 +213,43 @@
     height: auto;
     justify-content: flex-end;
     margin-top: auto;
+}
+.trans-filter {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em;
+    border: 1px solid gray;
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 0.75em 0;
+    &:hover {
+        background-color: whitesmoke;
+        border-color: black;
+    }
+}
+.trans-round {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+    border: 1px solid gray;
+    margin-right: 0.75em;
+}
+.trans-round-checked {
+    background-color: #5883d3;
+    border-color: #5883d3;
+    position: relative;
+}
+.trans-round-checked::after {
+    content: "";
+    position: absolute;
+    top: 0.375em;
+    left: 0.25em;
+    width: 0.75em;
+    height: 0.25em;
+    border-left: 2px solid white;
+    border-top: 2px solid white;
+    display: block;
+    transform: rotate(135deg) scaleX(-1);
 }

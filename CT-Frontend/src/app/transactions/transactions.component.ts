@@ -16,6 +16,8 @@ export class TransactionsComponent implements OnInit {
     staffs: any;
     start_date: Date;
     end_date: Date;
+    params: any;
+    resetValue: boolean;
 
     log_records: any = [];
     staff: any;
@@ -39,6 +41,22 @@ export class TransactionsComponent implements OnInit {
                 selected: 0,
             };
         });
+
+        this.params = {
+            staff: 0,
+            start_date: undefined,
+            end_date: undefined,
+        };
+
+        this.resetValue = false;
+    }
+
+    resetFields() {
+        this.resetValue = true;
+
+        this.start_date = undefined;
+        this.end_date = undefined;
+        this.staff = { value: 0, name: 'Select Staff' };
     }
 
     convertToJSON(data: any) {
@@ -60,20 +78,30 @@ export class TransactionsComponent implements OnInit {
     }
 
     applyFilter(start: any = null) {
-        const params = {
-            staff: this.staff.value,
-            start_date: this.start_date,
-            end_date: this.end_date,
-            start: start,
-        };
-        this.tranService.getTransactions(params).subscribe((data) => {
+        this.resetValue = false;
+
+        if (start == null) {
+            this.page = 1;
+            this.params = {
+                staff: this.staff.value,
+                start_date: this.start_date,
+                end_date: this.end_date,
+                start: 0,
+            };
+        } else this.params.start = start;
+
+        console.log(this.params);
+
+        this.tranService.getTransactions(this.params).subscribe((data) => {
             this.total_records = data['total'];
             this.convertToJSON(data['transactions']);
         });
     }
+
     onPageChange(data: any) {
         this.page = data;
         this.applyFilter((this.page - 1) * this.per_page);
     }
+
     ngOnInit(): void {}
 }

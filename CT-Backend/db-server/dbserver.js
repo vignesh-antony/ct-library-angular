@@ -448,6 +448,8 @@ class DBServer {
                     title: data.bName,
                     sub_title: data.bAuthor,
                     count: data.bCopy,
+                    categ: data.cID,
+                    id: res.insertId,
                 },
                 time: new Date(),
             });

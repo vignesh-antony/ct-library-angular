@@ -17,11 +17,16 @@
     <div class="filter">
         <h3>
             <span>Search Filter</span>
-            <span class="icon reset" title="Reset"></span>
+            <span
+                class="icon reset"
+                title="Reset"
+                (click)="resetFields()"
+            ></span>
         </h3>
         <form-select
             *ngIf="staffs"
             [options]="staffs"
+            [reset]="resetValue"
             (selectValue)="updateStaff($event)"
         >
         </form-select>
@@ -43,6 +48,26 @@
             />
             <span class="text">End Date</span>
         </div>
+        <div class="trans-filter">
+            <span class="trans-round"></span>
+            <p>Books Issued</p>
+            <span class="log-icon"></span>
+        </div>
+        <div class="trans-filter">
+            <span class="trans-round"></span>
+            <p>Books Renewed</p>
+            <span class="log-icon renew-log"></span>
+        </div>
+        <div class="trans-filter">
+            <span class="trans-round"></span>
+            <p>Books Returned</p>
+            <span class="log-icon return-log"></span>
+        </div>
+        <div class="trans-filter">
+            <span class="trans-round"></span>
+            <p>Books Management</p>
+            <span class="log-icon admin-log"></span>
+        </div>
         <button class="button" (click)="applyFilter()">Apply Filter</button>
     </div>
 </div>
@@ -61,6 +86,13 @@
     <div class="log-record">
         <div
             class="logs"
+            [ngClass]="{
+                'log-issue': log.type == 9,
+                'log-renew': log.type == 10,
+                'log-return': log.type == 11,
+                'log-book': log.type == 3 || log.type == 4 || log.type == 5,
+                'log-categ': log.type == 6 || log.type == 7 || log.type == 8
+            }"
             *ngFor="
                 let log of log_records
                     | paginate
@@ -76,9 +108,12 @@
                     <span>{{ log.content.message }}</span>
                     <span
                         class="b-count"
-                        title="Count"
+                        title="Book ID"
                         *ngIf="log.content.id"
-                        >{{ log.content.categ + log.content.id }}</span
+                        >{{
+                            log.content.categ +
+                                ("" + log.content.id).padStart(4, "0")
+                        }}</span
                     >
                 </b>
                 <p>
