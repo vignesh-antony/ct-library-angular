@@ -20,6 +20,8 @@ export class TransactionsComponent implements OnInit {
     log_records: any = [];
     staff: any;
 
+    page: number;
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private dateService: DateService,
