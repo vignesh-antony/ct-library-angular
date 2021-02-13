@@ -63,7 +63,12 @@
             class="logs"
             *ngFor="
                 let log of log_records
-                    | paginate: { itemsPerPage: 12, currentPage: page }
+                    | paginate
+                        : {
+                              itemsPerPage: per_page,
+                              currentPage: page,
+                              totalItems: total_records
+                          }
             "
         >
             <div class="l-info">
@@ -87,5 +92,11 @@
             </div>
         </div>
     </div>
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    <pagination-controls
+        class="page-control"
+        previousLabel=""
+        nextLabel=""
+        autoHide="true"
+        (pageChange)="onPageChange($event)"
+    ></pagination-controls>
 </div>

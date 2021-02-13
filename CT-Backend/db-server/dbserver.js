@@ -455,7 +455,10 @@ class DBServer {
         }
     }
     async getTransactions(data) {
+        let query_get = "";
         let query = "SELECT `type_ref`,`content`,`logTime` FROM `logs` ";
+        let query_count = "SELECT COUNT(`logID`) as total FROM `logs` ";
+
         let params = [];
 
         if (
@@ -463,33 +466,40 @@ class DBServer {
             data.staff != undefined &&
             (data.staff || data.start_date || data.end_date)
         ) {
-            query += "WHERE ";
+            query_get += "WHERE ";
 
             if (data.staff) {
-                query += "`sID` = ? ";
+                query_get += "`sID` = ? ";
                 params.push(data.staff);
             }
 
             if (data.staff && (data.start_date || data.end_date))
-                query += "AND ";
+                query_get += "AND ";
 
             if (data.start_date && data.end_date) {
-                query += "DATE(`logTime`) BETWEEN ? AND ?";
+                query_get += "DATE(`logTime`) BETWEEN ? AND ?";
                 params.push(data.start_date, data.end_date);
             } else if (data.start_date) {
-                query += "DATE(`logTime`) >= ? ";
+                query_get += "DATE(`logTime`) >= ? ";
                 params.push(data.start_date);
             } else if (data.end_date) {
-                query += "DATE(`logTime`) <= ? ";
+                query_get += "DATE(`logTime`) <= ? ";
                 params.push(data.end_date);
             }
         }
-        query +=
+
+        let total = await this.getData(query_count + query_get, params);
+
+        query_get +=
             "ORDER BY `logTime` DESC LIMIT " +
             (data.start ? data.start : 0) +
             ", 12";
 
-        return this.getData(query, params);
+        let transactions = await this.getData(query + query_get, params);
+        return {
+            total: total[0] ? total[0].total : 0,
+            transactions: transactions,
+        };
     }
 }
 

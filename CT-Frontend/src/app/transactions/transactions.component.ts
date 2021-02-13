@@ -21,6 +21,8 @@ export class TransactionsComponent implements OnInit {
     staff: any;
 
     page: number;
+    total_records: number;
+    per_page: number = 12;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -30,7 +32,8 @@ export class TransactionsComponent implements OnInit {
         this.staff = { value: 0, name: 'Select Staff' };
 
         this.activatedRoute.data.subscribe((data) => {
-            this.convertToJSON(data['data']);
+            this.total_records = data['data']['total'];
+            this.convertToJSON(data['data']['transactions']);
             this.staffs = {
                 list: [this.staff].concat(data['staff']),
                 selected: 0,
@@ -56,15 +59,21 @@ export class TransactionsComponent implements OnInit {
         this.staff = data;
     }
 
-    applyFilter() {
+    applyFilter(start: any = null) {
         const params = {
             staff: this.staff.value,
             start_date: this.start_date,
             end_date: this.end_date,
+            start: start,
         };
         this.tranService.getTransactions(params).subscribe((data) => {
-            this.convertToJSON(data);
+            this.total_records = data['total'];
+            this.convertToJSON(data['transactions']);
         });
+    }
+    onPageChange(data: any) {
+        this.page = data;
+        this.applyFilter((this.page - 1) * this.per_page);
     }
     ngOnInit(): void {}
 }
