@@ -1,22 +1,21 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class AppService {
+    private api_url: string;
+    private base_url: string;
 
-    private api_url:string;
-    private base_url:string;
-
-    constructor() { 
-        this.api_url = "http://localhost:3000/";
-        this.base_url = "http://localhost:4200";
+    constructor() {
+        this.api_url = 'http://localhost:3000/';
+        this.base_url = 'http://localhost:4200';
     }
 
-    get API(){
+    get API() {
         return this.api_url;
     }
-    get BaseURL(){
+    get BaseURL() {
         return this.base_url;
     }
 }

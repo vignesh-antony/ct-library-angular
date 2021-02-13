@@ -17,67 +17,67 @@ import { TransactionsResolver } from './resolver/transactions.resolver';
 
 const routes: Routes = [
     {
-        path:"search-book",
-        component:SearchBookComponent,
-        resolve:{
-            categ:CategoryResolver
-        }
+        path: 'search-book',
+        component: SearchBookComponent,
+        resolve: {
+            categ: CategoryResolver,
+        },
     },
     {
-        path:"borrowed-books",
-        component:BorrowedBooksComponent,
-        resolve:{
-            data:BorrowedBooksResolver
-        }
+        path: 'borrowed-books',
+        component: BorrowedBooksComponent,
+        resolve: {
+            data: BorrowedBooksResolver,
+        },
     },
     {
-        path:"pending-books",
-        component:PendingBooksComponent,
-        resolve:{
-            data:PendingBooksResolver
-        }
+        path: 'pending-books',
+        component: PendingBooksComponent,
+        resolve: {
+            data: PendingBooksResolver,
+        },
     },
     {
-        path:"issue-books",
-        component:IssueBooksComponent,
-        resolve:{
-            data:StaffResolver,
-            categ:CategoryResolver
-        }
+        path: 'issue-books',
+        component: IssueBooksComponent,
+        resolve: {
+            data: StaffResolver,
+            categ: CategoryResolver,
+        },
     },
     {
-        path:"renew-books",
-        component:RenewBooksComponent,
-        resolve:{
-            data:StaffResolver
-        }
+        path: 'renew-books',
+        component: RenewBooksComponent,
+        resolve: {
+            data: StaffResolver,
+        },
     },
     {
-        path:"book-category",
-        component:BookCategoryComponent,
-        resolve:{
-            data:BookCategoryResolver
-        }
+        path: 'book-category',
+        component: BookCategoryComponent,
+        resolve: {
+            data: BookCategoryResolver,
+        },
     },
     {
-        path:"manage-books",
-        component:ManageBooksComponent,
-        resolve:{
-            categ:CategoryResolver
-        }
+        path: 'manage-books',
+        component: ManageBooksComponent,
+        resolve: {
+            categ: CategoryResolver,
+        },
     },
     {
-        path:"transactions",
-        component:TransactionsComponent,
-        resolve:{
-            data:TransactionsResolver,
-            staff:StaffResolver
-        }
-    }
+        path: 'transactions',
+        component: TransactionsComponent,
+        resolve: {
+            data: TransactionsResolver,
+            staff: StaffResolver,
+        },
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

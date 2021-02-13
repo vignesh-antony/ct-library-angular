@@ -5,35 +5,34 @@ import { AlertBoxService } from '../alert-box/alert-box.service';
 @Component({
     selector: 'app-search-book',
     templateUrl: './search-book.component.html',
-    styleUrls: ['./search-book.component.scss']
+    styleUrls: ['./search-book.component.scss'],
 })
 export class SearchBookComponent implements OnInit {
+    result: any;
+    category: any[] = [];
 
-    result:any;
-    category:any[] = [];
-
-    constructor(private alertBox:AlertBoxService,
-        private activatedRoute:ActivatedRoute) { 
-            this.activatedRoute.data.subscribe(data => {
-                this.category.push({name:"Book Category", value:""});
-                this.category = this.category.concat(data["categ"]);
-            });
-        }
-    getConfig(){
-        let config = {
-            type:"search-book",
-            categ:{
+    constructor(
+        private alertBox: AlertBoxService,
+        private activatedRoute: ActivatedRoute
+    ) {
+        this.activatedRoute.data.subscribe((data) => {
+            this.category.push({ name: 'Book Category', value: '' });
+            this.category = this.category.concat(data['categ']);
+        });
+    }
+    getConfig() {
+        const config = {
+            type: 'search-book',
+            categ: {
                 list: this.category,
-                selected: 0
+                selected: 0,
             },
-            button:"Search Books"
-        }
+            button: 'Search Books',
+        };
         return config;
     }
-    setResultData(value:any){
+    setResultData(value: any) {
         this.result = value;
     }
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

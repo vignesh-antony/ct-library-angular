@@ -1,4 +1,4 @@
-.main-title{
+.main-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,22 +6,22 @@
     padding-bottom: 0.5em;
     margin-bottom: 1.5em !important;
 }
-.main-title .icon{
+.main-title .icon {
     background-size: 1.25em;
     background-image: url("../../assets/img/data-col.png");
     margin-right: 0.5em;
 }
-.main-title span:nth-child(2){
+.main-title span:nth-child(2) {
     margin-right: auto;
 }
-.log-record{
+.log-record {
     max-height: 75vh;
     overflow: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1em;
 }
-.logs{
+.logs {
     padding: 1em;
     background-color: rgb(252, 252, 252);
     border: 1px solid gainsboro;
@@ -29,16 +29,16 @@
     justify-content: space-between;
     align-items: center;
     cursor: default;
-    &:hover{
+    &:hover {
         background-color: whitesmoke;
     }
 }
-.l-info b{
+.l-info b {
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
-.b-count{
+.b-count {
     display: inline-block;
     font-size: 0.85em;
     padding: 0.25em 0.5em;
@@ -49,63 +49,63 @@
     align-items: center;
     color: #0f3e68;
 }
-.l-info p{
+.l-info p {
     margin-top: 0.25em;
     display: flex;
     flex-direction: column;
     font-size: 0.8em;
 }
-.author{
+.author {
     color: #0f3e68;
 }
-.l-time{
+.l-time {
     display: flex;
     align-items: flex-end;
     flex-direction: column;
     font-size: 0.9em;
 }
-.filter-field{
+.filter-field {
     padding: 0.5em;
     border: 1.15px solid gray;
     border-radius: 3px;
     width: 40%;
     font-size: 0.75em;
 }
-.filter-field:focus{
-    border-color:rgb(25,111,184);
+.filter-field:focus {
+    border-color: rgb(25, 111, 184);
 }
-.log-filter-wrap{
+.log-filter-wrap {
     flex: 1;
     padding: 1em;
 }
-.log-filter-wrap h3{
+.log-filter-wrap h3 {
     margin-bottom: 0.5em;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.log-filters{
+.log-filters {
     width: 100%;
     display: flex;
     align-items: center;
 }
-.select-box-wrap{
+.select-box-wrap {
     display: flex;
     flex-direction: column;
     width: 40%;
 }
 .log-date-wrap,
-.log-text-wrap{
+.log-text-wrap {
     flex: 1;
     display: flex;
     flex-direction: column;
     margin-left: 1em;
 }
-.log-text-wrap{
+.log-text-wrap {
     flex: auto;
     margin-left: 0;
 }
-.filter-field-staff{
+.filter-field-staff {
     padding: 0.6em;
     margin: 0.25em auto;
     border: none;
@@ -113,11 +113,11 @@
     width: 100%;
     font-size: inherit;
 }
-.log-select .select-dropdown{
+.log-select .select-dropdown {
     max-height: 15em;
     overflow-y: auto;
 }
-.label{
+.label {
     display: block;
     margin-bottom: 0.35em;
     color: #287fcc;
@@ -125,7 +125,7 @@
     font-weight: bold;
 }
 .log-date,
-.log-text{
+.log-text {
     font-size: 0.875em;
     padding: 0.5em;
     border: none;
@@ -133,23 +133,23 @@
     border-radius: 3px;
     cursor: pointer;
 }
-.log-text{
+.log-text {
     font-size: 1em;
     background-color: white;
 }
-.log-check-filter{
+.log-check-filter {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 1em 0;
 }
-.log-check-filter .check-box{
+.log-check-filter .check-box {
     margin-left: 1.5em;
 }
-.log-check-filter .check-text{
+.log-check-filter .check-text {
     font-size: 0.95em;
 }
-.log-icon{
+.log-icon {
     width: 0.75em;
     height: 0.75em;
     display: block;
@@ -157,36 +157,36 @@
     border-radius: 50%;
     margin-left: 0.75em;
 }
-.renew-log{
+.renew-log {
     background-color: #529bdb;
 }
-.return-log{
+.return-log {
     background-color: #d86868;
 }
-.admin-log{
+.admin-log {
     background-color: #8047ca;
 }
-.log-issue{
+.log-issue {
     border-color: #62bd62;
     border-left-width: 4px;
 }
-.log-renew{
+.log-renew {
     border-color: #529bdb;
     border-left-width: 4px;
 }
-.log-return{
+.log-return {
     border-color: #d86868;
     border-left-width: 4px;
 }
-.log-book{
+.log-book {
     border-color: #8047ca;
     border-left-width: 4px;
 }
-.log-staff{
+.log-staff {
     border-color: #e21bd2;
     border-left-width: 4px;
 }
-.load-more{
+.load-more {
     width: max-content;
     margin: auto;
     margin-bottom: 1em;
@@ -196,6 +196,9 @@
     font-size: 0.95em;
     font-weight: bold;
 }
-.load-more:hover{
+.load-more:hover {
     color: white;
+}
+.f {
+    display: none;
 }

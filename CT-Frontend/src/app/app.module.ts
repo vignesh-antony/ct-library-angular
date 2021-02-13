@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,31 +22,26 @@ import { ManageBooksComponent } from './manage-books/manage-books.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    FootbarComponent,
-    SearchBookComponent,
-    SearchComponent,
-    ResultTableComponent,
-    BorrowedBooksComponent,
-    PendingBooksComponent,
-    IssueBooksComponent,
-    FormSelectComponent,
-    AlertBoxComponent,
-    RenewBooksComponent,
-    BookCategoryComponent,
-    PopupComponent,
-    ManageBooksComponent,
-    TransactionsComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        FootbarComponent,
+        SearchBookComponent,
+        SearchComponent,
+        ResultTableComponent,
+        BorrowedBooksComponent,
+        PendingBooksComponent,
+        IssueBooksComponent,
+        FormSelectComponent,
+        AlertBoxComponent,
+        RenewBooksComponent,
+        BookCategoryComponent,
+        PopupComponent,
+        ManageBooksComponent,
+        TransactionsComponent,
+    ],
+    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+    providers: [],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

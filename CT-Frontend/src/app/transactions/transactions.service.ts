@@ -4,12 +4,11 @@ import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class TransactionsService {
-
-    constructor(private http:HttpClient, private url:AppService) { }
-    getTransactions(data:any):Observable<any>{
-        return this.http.post(this.url.API + "transactions", data);
+    constructor(private http: HttpClient, private url: AppService) {}
+    getTransactions(data: any): Observable<any> {
+        return this.http.post(this.url.API + 'transactions', data);
     }
 }
