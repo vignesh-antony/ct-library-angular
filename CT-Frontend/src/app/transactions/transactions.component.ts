@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DateService } from '../date.service';
+import { DateService } from '../services/date.service';
 import { TransactionsService } from '../services/transactions.service';
 
 @Component({
