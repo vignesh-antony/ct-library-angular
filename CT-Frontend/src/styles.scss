@@ -1,19 +1,19 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     outline: none;
-    font-family: 'Whitney', sans-serif;
+    font-family: "Whitney", sans-serif;
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 0.6em;
     height: 0.6em;
     background-color: rgba(0, 0, 0, 0.2);
 }
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: #4da4df;
 }
-.icon{
+.icon {
     width: 2em;
     height: 2em;
     background-size: 1.5em;
@@ -22,7 +22,8 @@
     background-image: url("assets/img/lib-logo-design.png");
     display: block;
 }
-.check-box, .radio-box{
+.check-box,
+.radio-box {
     position: relative;
     top: auto;
     left: auto;
@@ -32,19 +33,22 @@
     cursor: pointer;
     background-color: transparent;
 }
-input[type=checkbox], input[type=radio]{
+input[type="checkbox"],
+input[type="radio"] {
     opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
     cursor: pointer;
 }
-.check-text, .radio-text{
+.check-text,
+.radio-text {
     margin-left: 0.5em;
     user-select: none;
     cursor: pointer;
 }
-.check-mark, .radio{
+.check-mark,
+.radio {
     width: 1em;
     height: 1em;
     background-color: whitesmoke;
@@ -56,8 +60,8 @@ input[type=checkbox], input[type=radio]{
     border-radius: 2px;
     transition: 0.2s;
 }
-.check-mark::after{
-    content: '';
+.check-mark::after {
+    content: "";
     position: absolute;
     bottom: 0.2em;
     width: 0.2em;
@@ -68,11 +72,11 @@ input[type=checkbox], input[type=radio]{
     display: none;
     transform: rotate(45deg);
 }
-.radio{
+.radio {
     border-radius: 50%;
 }
-.radio::after{
-    content: '';
+.radio::after {
+    content: "";
     position: absolute;
     width: 0.5em;
     height: 0.5em;
@@ -81,14 +85,14 @@ input[type=checkbox], input[type=radio]{
     display: none;
 }
 .check-box:hover > .check-mark,
-.radio-box:hover > .radio{
+.radio-box:hover > .radio {
     background-color: gainsboro;
 }
-input[type=checkbox]:checked ~ .check-mark,
-input[type=radio]:checked ~ .radio{
-    background-color: rgb(25,111,185);
+input[type="checkbox"]:checked ~ .check-mark,
+input[type="radio"]:checked ~ .radio {
+    background-color: rgb(25, 111, 185);
 }
-input[type=checkbox]:checked ~ .check-mark::after,
-input[type=radio]:checked ~ .radio::after{
+input[type="checkbox"]:checked ~ .check-mark::after,
+input[type="radio"]:checked ~ .radio::after {
     display: block;
 }
