@@ -106,11 +106,27 @@ export class ManageBooksComponent implements OnInit {
         } else {
             if (this.config.type == 'update') {
                 data.book_count = this.book_count;
-                this.manageService.updateBook(data).subscribe((res) => {
-                    this.alertBox.showAlertBox(res);
-                    this.modalView = false;
-                    this.value_change = true;
-                });
+                const update = this.alertBox
+                    .showConfirmBox({
+                        status: 'Warning',
+                        message: 'Are you sure?',
+                        description:
+                            'Do you want to save changes to this book?',
+                        confirm: true,
+                    })
+                    .subscribe((res) => {
+                        if (res == true) {
+                            this.manageService
+                                .updateBook(data)
+                                .subscribe((res) => {
+                                    this.alertBox.showAlertBox(res);
+                                    this.modalView = false;
+
+                                    this.value_change = true;
+                                    update.unsubscribe();
+                                });
+                        }
+                    });
             } else {
                 data.book_count = 0;
                 this.manageService.addBook(data).subscribe((res) => {
@@ -189,10 +205,22 @@ export class ManageBooksComponent implements OnInit {
         }
     }
     deleteBook(data: any) {
-        this.manageService.deleteBook(data).subscribe((data) => {
-            this.alertBox.showAlertBox(data);
-            this.value_change = true;
-        });
+        const del = this.alertBox
+            .showConfirmBox({
+                status: 'Warning',
+                message: 'Are you sure?',
+                description: 'Do you want to delete this book?',
+                confirm: true,
+            })
+            .subscribe((res) => {
+                if (res == true) {
+                    this.manageService.deleteBook(data).subscribe((data) => {
+                        this.alertBox.showAlertBox(data);
+                        this.value_change = true;
+                        del.unsubscribe();
+                    });
+                }
+            });
     }
     ngOnInit(): void {}
 }

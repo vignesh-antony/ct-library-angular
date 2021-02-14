@@ -40,7 +40,7 @@ class DBServer {
                 status: "Error",
                 message: "Book Not Deleted",
                 description:
-                    "Books which are borrowed by the staff cannot be deleted.",
+                    "Books that are borrowed by the staff cannot be deleted.",
             },
             delete_success: {
                 status: "Success",
@@ -145,7 +145,7 @@ class DBServer {
                 content: {
                     message: "Book Category has been inserted",
                     title: data.cName,
-                    categ: data.cID,
+                    sub_title: "Category Code - " + data.cID,
                 },
                 time: new Date(),
             });
@@ -167,7 +167,7 @@ class DBServer {
                 content: {
                     message: "Book Category has been updated",
                     title: data.cName,
-                    categ: data.cID,
+                    sub_title: "Category Code - " + data.cID,
                 },
                 time: new Date(),
             });
@@ -184,7 +184,7 @@ class DBServer {
                 content: {
                     message: "Book Category has been deleted",
                     title: data.cName,
-                    categ: data.cID,
+                    sub_title: "Category Code - " + data.cID,
                 },
                 time: new Date(),
             });
@@ -466,9 +466,27 @@ class DBServer {
         if (
             data != null &&
             data.staff != undefined &&
-            (data.staff || data.start_date || data.end_date)
+            (data.staff ||
+                data.start_date ||
+                data.end_date ||
+                (data.type && data.type.length))
         ) {
             query_get += "WHERE ";
+
+            if (data.type.length != 0) {
+                query_get += "`type_ref` IN (";
+
+                data.type.forEach((elem) => {
+                    if (elem == 0) query_get += "3,4,5,6,7,8,";
+                    else query_get += elem + ",";
+                });
+
+                query_get = query_get.slice(0, -1);
+                query_get += ") ";
+
+                if (data.staff || data.start_date || data.end_date)
+                    query_get += "AND ";
+            }
 
             if (data.staff) {
                 query_get += "`sID` = ? ";
@@ -479,7 +497,7 @@ class DBServer {
                 query_get += "AND ";
 
             if (data.start_date && data.end_date) {
-                query_get += "DATE(`logTime`) BETWEEN ? AND ?";
+                query_get += "DATE(`logTime`) BETWEEN ? AND ? ";
                 params.push(data.start_date, data.end_date);
             } else if (data.start_date) {
                 query_get += "DATE(`logTime`) >= ? ";

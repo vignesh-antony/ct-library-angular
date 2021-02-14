@@ -6,89 +6,118 @@ import { RenewBooksService } from './renew-books.service';
 @Component({
     selector: 'app-renew-books',
     templateUrl: './renew-books.component.html',
-    styleUrls: ['../search-book/search-book.component.scss','./renew-books.component.scss']
+    styleUrls: [
+        '../search-book/search-book.component.scss',
+        './renew-books.component.scss',
+    ],
 })
 export class RenewBooksComponent implements OnInit {
+    result: any;
+    value_change: boolean;
+    staff_name: string = '';
 
-    result:any;
-    value_change:boolean;
-    staff_name:string = "";
-    
-    options:any[] = [];
-    selected:any = { name:"", value:0 };
+    options: any[] = [];
+    selected: any = { name: '', value: 0 };
 
     constructor(
-        private renewService: RenewBooksService, 
+        private renewService: RenewBooksService,
         private alertBox: AlertBoxService,
-        private activatedRoute:ActivatedRoute) { 
-            this.activatedRoute.data.subscribe(data => {
-                this.options.push({name:"Select Staff", value:0});
-                this.options = this.options.concat(data["data"]);
-            })
+        private activatedRoute: ActivatedRoute
+    ) {
+        this.activatedRoute.data.subscribe((data) => {
+            this.options.push({ name: 'Select Staff', value: 0 });
+            this.options = this.options.concat(data['data']);
+        });
     }
-    getConfig(){
+    getConfig() {
         let config = {
-            type:"renew-book",
-            options:{
+            type: 'renew-book',
+            options: {
                 list: this.options,
-                selected:0
-            }
-        }
+                selected: 0,
+            },
+        };
         return config;
     }
-    setResultData(value:any){
+    setResultData(value: any) {
         this.value_change = false;
-        this.result = value["result"];
-        this.staff_name = value["select"];
+        this.result = value['result'];
+        this.staff_name = value['select'];
     }
-    setSelectValue(id:any){
+    setSelectValue(id: any) {
         this.selected = id;
     }
-    renewBook(data:any){
-        if(this.selected.value != 0){
-            this.renewService.renewBooks({
-                s_id:this.selected.value, 
-                s_name:this.selected.name ,
-                b_id:data.bID,
-                b_name:data.bName,
-                b_auth:data.bAuthor,
-                c_id:data.cID
-            }).subscribe(data => {
-                this.alertBox.showAlertBox(data);
-                this.value_change = true;
-            });
-        }
-        else {
+    renewBook(data: any) {
+        if (this.selected.value != 0) {
+            const renew = this.alertBox
+                .showConfirmBox({
+                    status: 'Warning',
+                    message: 'Are you sure?',
+                    description: 'Do you want to renew this book?',
+                    confirm: true,
+                })
+                .subscribe((res) => {
+                    if (res == true) {
+                        this.renewService
+                            .renewBooks({
+                                s_id: this.selected.value,
+                                s_name: this.selected.name,
+                                b_id: data.bID,
+                                b_name: data.bName,
+                                b_auth: data.bAuthor,
+                                c_id: data.cID,
+                            })
+                            .subscribe((data) => {
+                                this.alertBox.showAlertBox(data);
+                                this.value_change = true;
+                                renew.unsubscribe();
+                            });
+                    }
+                });
+        } else {
             this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Please select staff",
-                description:"Select the staff to whom the book has to be issued."
+                status: 'Warning',
+                message: 'Please select staff',
+                description:
+                    'Select the staff to whom the book has to be issued.',
             });
         }
     }
-    returnBook(data:any){
-        if(this.selected.value != 0){
-            this.renewService.returnBooks({
-                s_id:this.selected.value, 
-                s_name:this.selected.name ,
-                b_id:data.bID,
-                b_name:data.bName,
-                b_auth:data.bAuthor,
-                c_id:data.cID
-            }).subscribe(data => {
-                this.alertBox.showAlertBox(data);
-                this.value_change = true;
-            });
-        }
-        else{
+    returnBook(data: any) {
+        if (this.selected.value != 0) {
+            const ret = this.alertBox
+                .showConfirmBox({
+                    status: 'Warning',
+                    message: 'Are you sure?',
+                    description: 'Do you want to return this book?',
+                    confirm: true,
+                })
+                .subscribe((res) => {
+                    if (res == true) {
+                        this.renewService
+                            .returnBooks({
+                                s_id: this.selected.value,
+                                s_name: this.selected.name,
+                                b_id: data.bID,
+                                b_name: data.bName,
+                                b_auth: data.bAuthor,
+                                c_id: data.cID,
+                            })
+                            .subscribe((data) => {
+                                this.alertBox.showAlertBox(data);
+                                this.value_change = true;
+                                ret.unsubscribe();
+                            });
+                    }
+                });
+        } else {
             this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Please select staff",
-                description:"Select the staff to whom the book has to be issued."
+                status: 'Warning',
+                message: 'Please select staff',
+                description:
+                    'Select the staff to whom the book has to be issued.',
             });
         }
     }
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

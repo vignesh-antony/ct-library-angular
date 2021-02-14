@@ -6,75 +6,90 @@ import { IssueBooksService } from './issue-books.service';
 @Component({
     selector: 'app-issue-books',
     templateUrl: './issue-books.component.html',
-    styleUrls: ['../search-book/search-book.component.scss','./issue-books.component.scss']
+    styleUrls: [
+        '../search-book/search-book.component.scss',
+        './issue-books.component.scss',
+    ],
 })
 export class IssueBooksComponent implements OnInit {
+    result: any;
+    value_change: any;
 
-    result:any;
-    value_change:any;
-    
-    options:any[] = [];
-    category:any[] = [];
-    selected:any = { name:"", value:0 };
+    options: any[] = [];
+    category: any[] = [];
+    selected: any = { name: '', value: 0 };
 
     constructor(
-        private issueService:IssueBooksService, 
-        private alertBox:AlertBoxService,
-        private activatedRoute:ActivatedRoute) { 
-            this.activatedRoute.data.subscribe(data => {
-                this.options.push({name:"Select Staff", value:0});
-                this.options = this.options.concat(data["data"]);
+        private issueService: IssueBooksService,
+        private alertBox: AlertBoxService,
+        private activatedRoute: ActivatedRoute
+    ) {
+        this.activatedRoute.data.subscribe((data) => {
+            this.options.push({ name: 'Select Staff', value: 0 });
+            this.options = this.options.concat(data['data']);
 
-                this.category.push({name:"Book Category", value:""});
-                this.category = this.category.concat(data["categ"]);
-            });
-        }
+            this.category.push({ name: 'Book Category', value: '' });
+            this.category = this.category.concat(data['categ']);
+        });
+    }
 
-    getConfig(){
+    getConfig() {
         let config = {
-            type:"issue-book",
-            options:{
+            type: 'issue-book',
+            options: {
                 list: this.options,
-                selected: 0
+                selected: 0,
             },
-            categ:{
+            categ: {
                 list: this.category,
-                selected: 0
+                selected: 0,
             },
-            button: "Check Availability"
-        }
+            button: 'Check Availability',
+        };
         return config;
     }
-    setResultData(value:any){
+    setResultData(value: any) {
         this.value_change = false;
         this.result = value;
     }
-    setSelectValue(id:any){
+    setSelectValue(id: any) {
         this.selected = id;
     }
-    issueBook(data:any){
-        if(this.selected.value != 0){
-            this.issueService.issueBookToStaff({
-                    s_id:this.selected.value, 
-                    s_name:this.selected.name ,
-                    b_id:data.bID,
-                    b_name:data.bName,
-                    b_auth:data.bAuthor,
-                    c_id:data.cID
-                }).subscribe(data => {
-                this.alertBox.showAlertBox(data);
-                this.value_change = true;
-            });
-        }
-        else {
+    issueBook(data: any) {
+        if (this.selected.value != 0) {
+            const issue = this.alertBox
+                .showConfirmBox({
+                    status: 'Warning',
+                    message: 'Are you sure?',
+                    description: 'Do you want to issue this book?',
+                    confirm: true,
+                })
+                .subscribe((res: boolean) => {
+                    if (res == true) {
+                        this.issueService
+                            .issueBookToStaff({
+                                s_id: this.selected.value,
+                                s_name: this.selected.name,
+                                b_id: data.bID,
+                                b_name: data.bName,
+                                b_auth: data.bAuthor,
+                                c_id: data.cID,
+                            })
+                            .subscribe((data) => {
+                                this.alertBox.showAlertBox(data);
+                                this.value_change = true;
+                                issue.unsubscribe();
+                            });
+                    }
+                });
+        } else {
             this.alertBox.showAlertBox({
-                status:"Warning",
-                message:"Please select staff",
-                description:"Select the staff to whom the book has to be issued."
+                status: 'Warning',
+                message: 'Please select staff',
+                description:
+                    'Select the staff to whom the book has to be issued.',
             });
         }
     }
-    ngOnInit(): void {
-    }
-
+    ngOnInit(): void {}
 }

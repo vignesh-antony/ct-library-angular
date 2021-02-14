@@ -1,4 +1,4 @@
-.alert-wrap{
+.alert-wrap {
     display: none;
     justify-content: center;
     align-items: center;
@@ -8,12 +8,12 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
-.alert-flex{
+.alert-flex {
     display: flex;
 }
-.alert-box{
+.alert-box {
     width: 20%;
     display: flex;
     flex-direction: column;
@@ -25,31 +25,31 @@
     border-radius: 5px;
     box-shadow: 0px 0px 2px 0px black;
     transition: 0.2s;
-    animation: popup 0.15s linear ;
+    animation: popup 0.15s linear;
 }
-@keyframes popup{
-    0%{
+@keyframes popup {
+    0% {
         transform: scale(0.5);
         opacity: 0.75;
     }
-    100%{
+    100% {
         transform: scale(1);
         opacity: 1;
     }
 }
-.alert{
+.alert {
     background-image: unset;
     width: 3.5em;
     height: 3.5em;
     margin-bottom: 1em;
     position: relative;
 }
-.alert-correct{
+.alert-correct {
     border-radius: 50%;
     background-color: rgb(45, 173, 101);
 }
-.alert-correct::after{
-    content: '';
+.alert-correct::after {
+    content: "";
     position: absolute;
     top: 0.3em;
     left: 1.2em;
@@ -57,15 +57,16 @@
     height: 2em;
     border-style: solid;
     border-color: white;
-    border-width: 0px 4px 4px 0px ;
+    border-width: 0px 4px 4px 0px;
     transform: rotate(45deg);
 }
-.alert-wrong{
+.alert-wrong {
     background-color: rgb(175, 28, 28);
     border-radius: 0.75em;
 }
-.alert-wrong::after, .alert-wrong::before{
-    content: '';
+.alert-wrong::after,
+.alert-wrong::before {
+    content: "";
     position: absolute;
     top: 0.5em;
     left: 1.65em;
@@ -74,39 +75,39 @@
     background-color: white;
     transform: rotate(45deg);
 }
-.alert-wrong::before{
+.alert-wrong::before {
     transform: rotate(-45deg);
 }
-.alert-warning{
+.alert-warning {
     border-radius: 50%;
     background-color: rgb(241, 241, 53);
 }
-.alert-warning::before{
-    content: '!';
+.alert-warning::before {
+    content: "!";
     position: absolute;
     font-size: 2.75em;
     left: 0.5em;
 }
-.alert-box p{
+.alert-box p {
     display: block;
     margin: 0;
     margin-bottom: 0.15em;
     text-align: center;
 }
-.alert-box p b{
+.alert-box p b {
     font-size: 1.2em;
     display: block;
     margin-bottom: 0.5em;
 }
-.sub-msg{
+.sub-msg {
     font-size: 0.9em;
     margin-bottom: 0.5em;
 }
-.button-alert{
+.button-alert {
     display: flex;
     margin-top: 1em;
 }
-.alert-box button{
+.alert-box button {
     background-color: rgb(74, 167, 248);
     border: none;
     width: max-content;
@@ -118,59 +119,57 @@
     cursor: pointer;
     margin: 0em 1em;
 }
-.alert-box button:hover{
+.alert-box button:hover {
     background-color: rgb(49, 110, 164);
-    font-weight: bold;
 }
-.alert-cancel{
+.alert-box .alert-cancel {
     background-color: rgba(150, 0, 0, 0.534);
-    display: none;
+    &:hover {
+        background-color: rgba(150, 0, 0, 0.75);
+    }
 }
-.alert-cancel:hover{
-    background-color: rgba(150, 0, 0, 0.75);
-}
-@media only screen and (max-width:1560px){
-    .alert-box{
+@media only screen and (max-width: 1560px) {
+    .alert-box {
         width: 25%;
     }
 }
-@media only screen and (max-width:1300px){
-    .alert-box{
+@media only screen and (max-width: 1300px) {
+    .alert-box {
         width: 30%;
     }
 }
-@media only screen and (max-width:1150px){
-    .alert-box{
+@media only screen and (max-width: 1150px) {
+    .alert-box {
         width: 35%;
     }
 }
-@media only screen and (max-width:950px){
-    .alert-box{
+@media only screen and (max-width: 950px) {
+    .alert-box {
         width: 40%;
         font-size: 0.9em;
     }
 }
-@media only screen and (max-width:750px){
-    .alert-box{
+@media only screen and (max-width: 750px) {
+    .alert-box {
         width: 45%;
     }
 }
-@media only screen and (max-width:650px){
-    .alert-box{
+@media only screen and (max-width: 650px) {
+    .alert-box {
         width: 55%;
     }
 }
-@media only screen and (max-width:550px){
-    .alert-box{
+@media only screen and (max-width: 550px) {
+    .alert-box {
         width: 65%;
     }
 }
-@media only screen and (max-width:450px){
-    .alert-box{
+@media only screen and (max-width: 450px) {
+    .alert-box {
         width: 75%;
         font-size: 0.8em;
     }
-    .alert-box button{
+    .alert-box button {
         padding: 0.5em 2em;
     }
 }

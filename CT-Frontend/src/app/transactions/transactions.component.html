@@ -48,25 +48,17 @@
             />
             <span class="text">End Date</span>
         </div>
-        <div class="trans-filter">
-            <span class="trans-round"></span>
-            <p>Books Issued</p>
-            <span class="log-icon"></span>
-        </div>
-        <div class="trans-filter">
-            <span class="trans-round"></span>
-            <p>Books Renewed</p>
-            <span class="log-icon renew-log"></span>
-        </div>
-        <div class="trans-filter">
-            <span class="trans-round"></span>
-            <p>Books Returned</p>
-            <span class="log-icon return-log"></span>
-        </div>
-        <div class="trans-filter">
-            <span class="trans-round"></span>
-            <p>Books Management</p>
-            <span class="log-icon admin-log"></span>
+        <div
+            class="trans-filter"
+            *ngFor="let filter of filters; index as i"
+            (click)="updateFilter(i, filter.type)"
+        >
+            <span
+                class="trans-round"
+                [class.trans-round-checked]="filter.checked"
+            ></span>
+            <p>{{ filter.name }}</p>
+            <span class="log-icon {{ filter.color }}"></span>
         </div>
         <button class="button" (click)="applyFilter()">Apply Filter</button>
     </div>

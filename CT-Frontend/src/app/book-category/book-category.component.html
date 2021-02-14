@@ -2,26 +2,33 @@
     <section class="side-bar book-categ">
         <h2>
             <div class="top-content">
-                <span class="top-count">Manage Books Category</span><hr>
+                <span class="top-count">Manage Books Category</span>
+                <hr />
                 <span class="note">
-                You can <b>insert</b> new book category by clicking on <b>Add Category</b> button. And, you can also <b>edit, delete</b> existing book categories.
+                    You can <b>insert</b> new book category by clicking on
+                    <b>Add Category</b> button. And, you can also
+                    <b>edit, delete</b> existing book categories.
                 </span>
             </div>
             <span class="icon search categ-icon"></span>
-        </h2><hr>
-        <button class="button" (click)="showPopup()">+ Add Category</button><br>
+        </h2>
+        <hr />
+        <button class="button" (click)="showPopup()">+ Add Category</button
+        ><br />
     </section>
     <div class="book-categ-borrow" *ngIf="book_borrow">
         <h3 class="bc-title">Books Borrowed - Category-wise</h3>
         <div class="result-borrow">
             <table class="result">
                 <thead>
-                    <th style="text-align: left;">Category</th>
+                    <th style="text-align: left">Category</th>
                     <th>Count</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let categ of book_borrow">
-                        <td style="text-align: left;">{{ categ.cID }} - {{ categ.cName }}</td>
+                        <td style="text-align: left">
+                            {{ categ.cID }} - {{ categ.cName }}
+                        </td>
                         <td>{{ categ.bcount }}</td>
                     </tr>
                 </tbody>
@@ -34,7 +41,8 @@
         <span class="icon"></span>
         <span>Book Category</span>
         <span class="count">{{ category.length }}</span>
-    </h3><hr>
+    </h3>
+    <hr />
     <div class="result-table">
         <table class="result">
             <thead>
@@ -47,23 +55,39 @@
             </thead>
             <tbody>
                 <tr *ngFor="let categ of category; let i = index">
-                    <td>{{ i+1 }}</td>
-                    <td style="font-weight: 500;">{{ categ.cID }}</td>
+                    <td>{{ i + 1 }}</td>
+                    <td style="font-weight: 500">{{ categ.cID }}</td>
                     <td class="left">{{ categ.cName }}</td>
                     <td>{{ categ.bcount }}</td>
-                    <td><span class="edit-icon" (click)="showPopup([categ.cID, categ.cName])"></span></td>
-                    <td><span class="delete-icon" (click)="deleteCateg(categ.cID, categ.cName)"></span></td>
+                    <td>
+                        <span
+                            class="edit-icon"
+                            (click)="showPopup([categ.cID, categ.cName])"
+                        ></span>
+                    </td>
+                    <td>
+                        <span
+                            class="delete-icon"
+                            (click)="
+                                deleteCateg({
+                                    cID: categ.cID,
+                                    cName: categ.cName
+                                })
+                            "
+                        ></span>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </section>
-<popup 
+<popup
     *ngIf="modalView"
     [config]="getConfig()"
     [popup]="modalView"
     [popup_value]="value"
     [(error)]="error"
     (hideView)="closePopup($event)"
-    (modalData)="postData($event)">
+    (modalData)="postData($event)"
+>
 </popup>

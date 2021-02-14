@@ -16,6 +16,10 @@ export class TransactionsComponent implements OnInit {
     staffs: any;
     start_date: Date;
     end_date: Date;
+
+    ftype: Set<number>;
+    filters: any[];
+
     params: any;
     resetValue: boolean;
 
@@ -42,6 +46,34 @@ export class TransactionsComponent implements OnInit {
             };
         });
 
+        this.ftype = new Set();
+        this.filters = [
+            {
+                name: 'Books Issued',
+                type: 9,
+                checked: false,
+                color: '',
+            },
+            {
+                name: 'Books Renewed',
+                type: 10,
+                checked: false,
+                color: 'renew-log',
+            },
+            {
+                name: 'Books Returned',
+                type: 11,
+                checked: false,
+                color: 'return-log',
+            },
+            {
+                name: 'Books Management',
+                type: 0,
+                checked: false,
+                color: 'admin-log',
+            },
+        ];
+
         this.params = {
             staff: 0,
             start_date: undefined,
@@ -57,6 +89,11 @@ export class TransactionsComponent implements OnInit {
         this.start_date = undefined;
         this.end_date = undefined;
         this.staff = { value: 0, name: 'Select Staff' };
+
+        this.ftype.clear();
+        this.filters.forEach((elem, i) => {
+            this.filters[i].checked = false;
+        });
     }
 
     convertToJSON(data: any) {
@@ -77,6 +114,12 @@ export class TransactionsComponent implements OnInit {
         this.staff = data;
     }
 
+    updateFilter(index: number, type: number) {
+        this.filters[index].checked = !this.filters[index].checked;
+        if (this.ftype.has(type)) this.ftype.delete(type);
+        else this.ftype.add(type);
+    }
+
     applyFilter(start: any = null) {
         this.resetValue = false;
 
@@ -87,10 +130,9 @@ export class TransactionsComponent implements OnInit {
                 start_date: this.start_date,
                 end_date: this.end_date,
                 start: 0,
+                type: Array.from(this.ftype),
             };
         } else this.params.start = start;
-
-        console.log(this.params);
 
         this.tranService.getTransactions(this.params).subscribe((data) => {
             this.total_records = data['total'];
