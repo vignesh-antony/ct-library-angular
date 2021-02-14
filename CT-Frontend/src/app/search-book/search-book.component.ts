@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertBoxService } from '../alert-box/alert-box.service';
+import { AlertBoxService } from '../services/alert-box.service';
 
 @Component({
     selector: 'app-search-book',

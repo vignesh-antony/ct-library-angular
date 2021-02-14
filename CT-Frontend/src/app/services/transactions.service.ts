@@ -9,6 +9,6 @@ import { AppService } from '../app.service';
 export class TransactionsService {
     constructor(private http: HttpClient, private url: AppService) {}
     getTransactions(data: any): Observable<any> {
-        return this.http.post(this.url.API + 'transactions', data);
+        return this.http.post(this.url.API + '/transactions', data);
     }
 }

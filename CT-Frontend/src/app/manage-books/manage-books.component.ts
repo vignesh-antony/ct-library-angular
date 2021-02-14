@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertBoxService } from '../alert-box/alert-box.service';
-import { ManageBooksService } from './manage-books.service';
+import { AlertBoxService } from '../services/alert-box.service';
+import { ManageBooksService } from '../services/manage-books.service';
 
 @Component({
     selector: 'app-manage-books',

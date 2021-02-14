@@ -8,7 +8,7 @@ export class AppService {
     private base_url: string;
 
     constructor() {
-        this.api_url = 'http://localhost:3000/';
+        this.api_url = 'http://localhost:3000';
         this.base_url = 'http://localhost:4200';
     }
 

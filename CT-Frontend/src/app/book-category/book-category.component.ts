@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertBoxService } from '../alert-box/alert-box.service';
-import { BookCategoryService } from './book-category.service';
+import { AlertBoxService } from '../services/alert-box.service';
+import { BookCategoryService } from '../services/book-category.service';
 
 @Component({
     selector: 'app-book-category',

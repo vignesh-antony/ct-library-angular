@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { AlertBoxService } from '../alert-box/alert-box.service';
-import { SearchService } from './search.service';
+import { AlertBoxService } from '../services/alert-box.service';
+import { SearchService } from '../services/search.service';
 
 @Component({
     selector: 'search-filter',

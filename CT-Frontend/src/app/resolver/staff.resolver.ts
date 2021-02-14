@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import {
-    Router, Resolve,
+    Router,
+    Resolve,
     RouterStateSnapshot,
-    ActivatedRouteSnapshot
+    ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { SearchService } from '../search/search.service';
+import { SearchService } from '../services/search.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class StaffResolver implements Resolve<any> {
-
-    constructor(private searchService:SearchService) {}
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    constructor(private searchService: SearchService) {}
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<any> {
         return this.searchService.getStaffList();
     }
 }

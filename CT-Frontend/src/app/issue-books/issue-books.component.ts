@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertBoxService } from '../alert-box/alert-box.service';
-import { IssueBooksService } from './issue-books.service';
+import { AlertBoxService } from '../services/alert-box.service';
+import { IssueBooksService } from '../services/issue-books.service';
 
 @Component({
     selector: 'app-issue-books',

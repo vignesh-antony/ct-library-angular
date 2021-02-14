@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AlertBoxService } from './alert-box.service';
+import { AlertBoxService } from '../services/alert-box.service';
 
 @Component({
     selector: 'alert-box',

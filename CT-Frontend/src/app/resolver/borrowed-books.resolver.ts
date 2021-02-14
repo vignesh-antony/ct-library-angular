@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
 import {
-    Router, Resolve,
+    Router,
+    Resolve,
     RouterStateSnapshot,
-    ActivatedRouteSnapshot
+    ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { BorrowedBooksService } from '../borrowed-books/borrowed-books.service';
+import { BorrowedBooksService } from '../services/borrowed-books.service';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class BorrowedBooksResolver implements Resolve<any> {
-    constructor(private borrowService:BorrowedBooksService){ }
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    constructor(private borrowService: BorrowedBooksService) {}
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<any> {
         return this.borrowService.getBorrowedBooks();
     }
 }
