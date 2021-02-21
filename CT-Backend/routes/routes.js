@@ -1,5 +1,8 @@
 const routes = require("express").Router();
+const middleware = require("../middleware/verify-token");
 const db = require("../server/dbserver");
+
+routes.use(middleware.verifyToken);
 
 routes.post("/book-list", (req, res) => {
     db.getBookList(req.body).then((value) => {

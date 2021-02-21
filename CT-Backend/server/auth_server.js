@@ -17,7 +17,7 @@ class AuthServer {
             },
         };
     }
-    async performQuery(query, params = []) {
+    performQuery(query, params = []) {
         return new Promise((resolve, reject) => {
             db.query(query, params, function (err, rows) {
                 if (rows === undefined)
@@ -36,13 +36,17 @@ class AuthServer {
     }
     async checkLoginUser(data) {
         let query =
-            "SELECT `ID`,`Pass`,`Type` FROM `stafflist` WHERE `ID`= ? AND `Pass`= ?";
-        let result = await this.getData(query, [data.id, data.password]);
+            "SELECT `ID`,`Email Address`,`Pass`,`Type` FROM `staff` INNER JOIN `stafflist` USING(`ID`) WHERE `Email Address`= ? AND `Pass`= ?";
+        let result = await this.getData(query, [data.email, data.password]);
 
         if (result && result.status != "Error" && result.length != 0) {
             try {
-                let valid_user = { user_id: data.id, type: result[0].type };
-                return jwt.sign(valid_user, process.env.SECRET_KEY);
+                let valid_user = {
+                    user_id: result[0].ID,
+                    user_email: result[0][`Email Address`],
+                    type: result[0].Type,
+                };
+                return { token: jwt.sign(valid_user, process.env.SECRET_KEY) };
             } catch (err) {
                 return this.response["error"];
             }

@@ -1,0 +1,298 @@
+:host {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    margin: auto;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid gainsboro;
+}
+.main .left {
+    width: 40%;
+    background-color: rgb(15, 62, 104);
+    color: white;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.mit-logo {
+    width: 6em;
+    height: 6em;
+    background-size: 5em;
+    background-image: url("../../../assets/img/lib-logo-white.png");
+    margin-top: 1em;
+}
+.left h2 {
+    padding: 0.5em;
+}
+.left p {
+    border-top: 1px solid white;
+    font-size: 0.9em;
+    padding: 1.25em;
+    text-align: justify;
+    line-height: 1.75em;
+}
+.left .author {
+    font-size: 0.75em;
+    padding: 1em;
+    display: block;
+    margin-bottom: 1em;
+    width: 100%;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: right;
+}
+.main .right {
+    width: 60%;
+    padding: 0.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+.choice {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 1.5em;
+}
+.choice span {
+    font-size: 1.1em;
+    text-align: center;
+    padding: 0.75em;
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: 0.3s;
+    background-color: rgba(25, 111, 185, 0.05);
+    color: rgb(7, 46, 80);
+}
+.choice .selected {
+    background-color: white;
+    color: black;
+}
+.user {
+    background-image: url("../../../assets/img/user-new.png");
+    width: 3.75em;
+    height: 3.75em;
+    background-size: 3.5em;
+    margin: 0.75em 0em;
+}
+.new {
+    background-image: url("../../../assets/img/signup.png");
+}
+.signup {
+    display: none;
+}
+form {
+    margin-bottom: auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transition: 0.3s;
+    -webkit-animation: slide-left 0.3s linear;
+    animation: slide-left 0.3s linear;
+}
+@-webkit-keyframes slide-left {
+    0% {
+        opacity: 0;
+        margin-right: 15%;
+    }
+    100% {
+        opacity: 1;
+        margin-left: 0%;
+    }
+}
+@keyframes slide-left {
+    0% {
+        opacity: 0;
+        margin-right: 15%;
+    }
+    100% {
+        opacity: 1;
+        margin-left: 0%;
+    }
+}
+form input {
+    outline: none;
+    width: 100%;
+    border: 1px solid gray;
+    padding: 0.7em;
+    font-size: 0.95em;
+    border-radius: 3px;
+}
+.input-wrap {
+    position: relative;
+    transition: 0.2s;
+    margin-bottom: 1.25em;
+    width: 80%;
+}
+form input:focus,
+form input:valid {
+    border: 1px solid rgb(25, 111, 185);
+}
+form input:focus ~ label,
+form input:valid ~ label {
+    top: -0.6em;
+    font-size: 0.7em;
+    font-weight: bold;
+    color: rgb(25, 111, 185);
+}
+label {
+    position: absolute;
+    top: 0.6em;
+    left: 0.75em;
+    background-color: white;
+    display: block;
+    cursor: text;
+    transition: 0.2s;
+}
+form input[type="submit"],
+form input[type="button"] {
+    border: none;
+    width: 40%;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(25, 111, 185);
+    transition: 0.2s;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.password {
+    margin-bottom: 0.75em;
+}
+.check-style {
+    font-size: 0.7em;
+    letter-spacing: 1px;
+    margin-bottom: 1em;
+    font-weight: bold;
+    color: rgb(7, 46, 80);
+}
+.check-style .check-mark {
+    width: 1.35em;
+    height: 1.35em;
+}
+.check-style .check-mark::after {
+    top: 0.1em;
+    left: 0.4em;
+    width: 0.25em;
+}
+form input[type="button"] {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+form #forgot_pass {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.75em;
+    color: rgb(137, 14, 153);
+    cursor: pointer;
+}
+.forgot-note {
+    font-size: 0.65em;
+    padding: 1em;
+    color: gray;
+    width: 80%;
+    text-align: justify;
+    margin-top: 0.25em;
+}
+form input[type="button"]:hover {
+    background-color: rgb(15, 62, 104);
+}
+.note {
+    font-size: 0.7em;
+    display: block;
+    margin-bottom: 1em;
+    width: 80%;
+    background-color: rgba(25, 111, 185, 0.025);
+    border: 1px solid rgb(6, 51, 90);
+    padding: 0.5em;
+    border-radius: 3px;
+}
+.menu-bar-side {
+    display: none;
+}
+@media only screen and (max-width: 1400px) {
+    .main {
+        width: 60%;
+    }
+}
+@media only screen and (max-width: 1200px) {
+    .main {
+        width: 65%;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .main {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .main {
+        width: 75%;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .main {
+        width: 60%;
+    }
+    .main {
+        flex-direction: column;
+        margin: 2em auto;
+        box-shadow: unset;
+    }
+    .main .left,
+    .main .right {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .main .left {
+        margin-bottom: 1.5em;
+    }
+    .main .right {
+        padding: 1em;
+        box-shadow: 0px 1px 2px 0px rgba(25, 111, 185, 0.5);
+    }
+}
+@media only screen and (max-width: 750px) {
+    .main {
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .main {
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .main {
+        width: 90%;
+        font-size: 0.9em;
+    }
+    .input-wrap,
+    .forgot-note,
+    .note {
+        width: 85%;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .main {
+        width: 95%;
+    }
+    .input-wrap,
+    .forgot-note,
+    .note {
+        width: 90%;
+    }
+}

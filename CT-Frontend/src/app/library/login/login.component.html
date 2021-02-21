@@ -1,0 +1,39 @@
+<section class="main">
+    <div class="left">
+        <span class="icon mit-logo"></span>
+        <h2>CT Library</h2>
+        <p>
+            Libraries store the energy that fuels the <b>imagination</b>. They
+            open up windows to the world and inspire us to explore and achieve,
+            and contribute to improving our quality of life.
+        </p>
+        <span class="author"> - Sidney Sheldon</span>
+    </div>
+    <div class="right">
+        <h3 class="choice">
+            <span class="selected">Login</span>
+        </h3>
+        <form spellcheck="false" autocomplete="off" class="login">
+            <span class="icon user"></span>
+            <div class="input-wrap">
+                <input type="text" name="email" [(ngModel)]="email" required />
+                <label for="email">Email Address</label>
+            </div>
+            <div class="input-wrap password">
+                <input
+                    type="password"
+                    name="password"
+                    [(ngModel)]="password"
+                    required
+                />
+                <label for="pass">Password</label>
+            </div>
+            <input type="button" value="Get Started" (click)="loginUser()" />
+            <span id="forgot_pass">Forgot Password?</span>
+            <span class="forgot-note"
+                ><b>Note : </b>Only provide Email Address when you have
+                forgotten your password. Then click forgot password.</span
+            >
+        </form>
+    </div>
+</section>

@@ -85,7 +85,7 @@ class DBServer {
             },
         };
     }
-    async performQuery(query, params = []) {
+    performQuery(query, params = []) {
         return new Promise((resolve, reject) => {
             db.query(query, params, function (err, rows) {
                 if (rows === undefined)
@@ -102,7 +102,7 @@ class DBServer {
             return Promise.resolve(this.response["error"]);
         }
     }
-    async insertLog(data) {
+    insertLog(data) {
         let cont = JSON.stringify(data.content);
         let s_id = data.s_id ? data.s_id : 0;
 
@@ -110,7 +110,7 @@ class DBServer {
             "INSERT INTO `logs`(`sID`,`type_ref`,`content`,`logTime`) VALUES(?, ?, ?, ?)";
         return this.getData(query, [s_id, data.type, cont, data.time]);
     }
-    async getBookList(data) {
+    getBookList(data) {
         let query =
             "SELECT * from `book` WHERE `bName` LIKE ? AND `cID` LIKE ? AND `bAuthor` LIKE ? AND `bPublish` LIKE ? AND `bYear` LIKE ? ORDER BY `bName`";
         return this.getData(query, [
@@ -121,7 +121,7 @@ class DBServer {
             data.year,
         ]);
     }
-    async getBookCategory() {
+    getBookCategory() {
         let query =
             "SELECT `cID`, `cName`, COUNT(`bID`) as bcount FROM `bookcateg` LEFT OUTER JOIN `book` USING(`cID`) GROUP BY `cID` ORDER BY `bookcateg`.`cID`";
         return this.getData(query, []);
@@ -191,36 +191,36 @@ class DBServer {
             return this.response["categ_delete"];
         } else return this.response["categ_del_error"];
     }
-    async getStaffList() {
+    getStaffList() {
         let query =
             "SELECT `ID` as value, `Name` as name FROM `staff` NATURAL JOIN `stafflist` WHERE `type` = 0";
         return this.getData(query, []);
     }
-    async getCategory() {
+    getCategory() {
         let query =
             "SELECT `cID` as value, CONCAT(`cID`,' - ',`cName`) as name FROM `bookcateg`";
         return this.getData(query, []);
     }
-    async getBorrowedBooks(id) {
+    getBorrowedBooks(id) {
         let query =
             "SELECT * from `book` NATURAL JOIN `booklist` where `ID` = ? ORDER BY `timeIn` DESC";
         return this.getData(query, [id]);
     }
-    async getPendingBooks(id) {
+    getPendingBooks(id) {
         let query =
             "SELECT * from `book` NATURAL JOIN `booklist` where `ID` = ? AND `timeOut` < ? ORDER BY `timeOut` DESC";
         return this.getData(query, [id, new Date()]);
     }
-    async getMaximumCount(id) {
+    getMaximumCount(id) {
         let query =
             "SELECT COUNT(`bID`) FROM `booklist` WHERE `ID` = ? HAVING COUNT(`bID`) >= (SELECT `config_value` FROM config WHERE `config_id` = 1)";
         return this.getData(query, [id]);
     }
-    async getRenewalTime() {
+    getRenewalTime() {
         let query = "SELECT `config_value` FROM `config` WHERE `config_id` = 2";
         return this.getData(query);
     }
-    async addIssueEntry(sid, bid, renewal) {
+    addIssueEntry(sid, bid, renewal) {
         let today = new Date();
         let due = new Date(new Date().setMonth(today.getMonth() + renewal));
 
@@ -228,7 +228,7 @@ class DBServer {
             "INSERT into `booklist`(`ID`,`bID`,`timeIn`,`timeOut`) values(? , ? , ? , ?)";
         return this.getData(query, [sid, bid, today, due]);
     }
-    async reduceBookCount(bid) {
+    reduceBookCount(bid) {
         let query =
             "UPDATE `book` SET `bCopy`= `bCopy`-1 WHERE `bID`= ? AND `bCopy` > 0";
         return this.getData(query, [bid]);
@@ -266,7 +266,7 @@ class DBServer {
             } else return this.response["error"];
         } else return this.response["max_limit_reached"];
     }
-    async addRenewEntry(sid, bid, renewal) {
+    addRenewEntry(sid, bid, renewal) {
         let today = new Date();
         let due = new Date(new Date().setMonth(today.getMonth() + renewal));
 
@@ -301,11 +301,11 @@ class DBServer {
             return this.response["error"];
         } else return this.response["error"];
     }
-    async increaseBookCount(bid) {
+    increaseBookCount(bid) {
         let query = "UPDATE `book` SET `bCopy`= `bCopy`+1 WHERE `bID`= ?";
         return this.getData(query, [bid]);
     }
-    async removeEntry(sid, bid) {
+    removeEntry(sid, bid) {
         let query = "DELETE FROM `booklist` WHERE `ID`= ? AND `bID`= ?";
         return this.getData(query, [sid, bid]);
     }
@@ -333,13 +333,13 @@ class DBServer {
             } else return this.response["error"];
         } else return this.response["error"];
     }
-    async insertBook(data, i_query) {
+    insertBook(data, i_query) {
         let query =
             "INSERT INTO `book`(`cID`,`bName`,`bAuthor`,`bPublish`,`bYear`,`bCopy`) VALUES " +
             i_query;
         return this.getData(query, data);
     }
-    async addNewBooks(data) {
+    addNewBooks(data) {
         let i_query = "";
         let params = [];
 
@@ -358,7 +358,7 @@ class DBServer {
 
         return this.insertBook(params, i_query);
     }
-    async updateOldBook(data) {
+    updateOldBook(data) {
         let query =
             "UPDATE `book` SET `cID` = ?, `bName` = ?, `bAuthor` = ?, `bPublish` = ?, `bYear` = ? WHERE `bID` = ?";
         return this.getData(query, [
@@ -409,7 +409,7 @@ class DBServer {
             return this.response["update_success"];
         }
     }
-    async deleteCheck(data) {
+    deleteCheck(data) {
         let query = "SELECT `ID` FROM `booklist` WHERE `bID` = ?";
         return this.getData(query, [data]);
     }

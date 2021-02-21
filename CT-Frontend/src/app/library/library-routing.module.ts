@@ -16,11 +16,15 @@ import { SearchBookComponent } from './search-book/search-book.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 
 import { LibraryComponent } from './library.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from '../auth/auth.guard';
+import { AuthStateGuard } from '../auth/auth-state.guard';
 
 const routes: Routes = [
     {
         path: '',
         component: LibraryComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'search-books',
@@ -79,6 +83,17 @@ const routes: Routes = [
                     data: TransactionsResolver,
                     staff: StaffResolver,
                 },
+            },
+        ],
+    },
+    {
+        path: 'login',
+        component: LibraryComponent,
+        canActivate: [AuthStateGuard],
+        children: [
+            {
+                path: '',
+                component: LoginComponent,
             },
         ],
     },

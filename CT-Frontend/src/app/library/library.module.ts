@@ -20,8 +20,9 @@ import { BookCategoryComponent } from './book-category/book-category.component';
 import { PopupComponent } from './popup/popup.component';
 import { ManageBooksComponent } from './manage-books/manage-books.component';
 import { TransactionsComponent } from './transactions/transactions.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { FormsModule } from '@angular/forms';
         PopupComponent,
         ManageBooksComponent,
         TransactionsComponent,
+        LoginComponent,
     ],
     imports: [
         CommonModule,
@@ -49,5 +51,6 @@ import { FormsModule } from '@angular/forms';
         HttpClientModule,
         NgxPaginationModule,
     ],
+    providers: [],
 })
 export class LibraryModule {}
