@@ -4,13 +4,46 @@
         <span>CT Library Management</span>
         <span>Keep Learning!</span>
     </span>
-    <ul class="menu-list">
-        <a routerLink="" class="home-menu"><li>Home</li></a>
-        <a routerLink="" class="add-menu"><li>Add Book</li></a>
-        <a routerLink="" class="issue-menu"><li>Issue</li></a>
-        <a routerLink="" class="renew-menu"><li>Renew</li></a>
+    <ul class="menu-list" *ngIf="currentUser.logged">
+        <a class="home-menu" routerLink="./"><li>Home</li></a>
+        <a
+            class="add-menu"
+            *ngIf="currentUser.admin"
+            routerLink="./manage-books"
+            ><li>Add Book</li></a
+        >
+        <a
+            class="issue-menu"
+            *ngIf="currentUser.admin"
+            routerLink="./issue-books"
+            ><li>Issue</li></a
+        >
+        <a
+            class="renew-menu"
+            *ngIf="currentUser.admin"
+            routerLink="./renew-books"
+            ><li>Renew</li></a
+        >
+        <a
+            class="search-menu"
+            *ngIf="!currentUser.admin"
+            routerLink="./search-books"
+            ><li>Search Book</li></a
+        >
+        <a
+            class="borrow-menu"
+            *ngIf="!currentUser.admin"
+            routerLink="./borrowed-books"
+            ><li>Borrowed</li></a
+        >
+        <a
+            class="expire-menu"
+            *ngIf="!currentUser.admin"
+            routerLink="./pending-books"
+            ><li>Pending List</li></a
+        >
         <a routerLink=""><li>Settings</li></a>
-        <span class="log-menu logout"><li>Logout</li></span>
+        <span class="log-menu logout" (click)="logout()"><li>Logout</li></span>
     </ul>
-    <span class=" icon menu-icon"></span>
+    <span class="icon menu-icon" *ngIf="currentUser.logged"></span>
 </h1>

@@ -16,14 +16,14 @@ routes.get("/staff-list", (req, res) => {
     });
 });
 
-routes.get("/borrowed-books/:id", (req, res) => {
-    db.getBorrowedBooks(req.params["id"]).then((value) => {
+routes.get("/borrowed-books", (req, res) => {
+    db.getBorrowedBooks(req.staff_id).then((value) => {
         res.send(value);
     });
 });
 
 routes.get("/pending-books", (req, res) => {
-    db.getPendingBooks(1).then((value) => {
+    db.getPendingBooks(req.staff_id).then((value) => {
         res.send(value);
     });
 });
@@ -101,7 +101,7 @@ routes.post("/delete-category", (req, res) => {
 });
 
 routes.post("/transactions", (req, res) => {
-    db.getTransactions(req.body).then((value) => {
+    db.getTransactions(req.body, req.staff_id, req.role).then((value) => {
         res.send(value);
     });
 });

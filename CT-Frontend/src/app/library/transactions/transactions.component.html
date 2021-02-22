@@ -24,12 +24,15 @@
             ></span>
         </h3>
         <form-select
-            *ngIf="staffs"
+            *ngIf="staffs && currentUser.admin"
             [options]="staffs"
             [reset]="resetValue"
             (selectValue)="updateStaff($event)"
         >
         </form-select>
+        <div class="input-wrap" *ngIf="!currentUser.admin">
+            <input type="text" [value]="currentUser.name" disabled />
+        </div>
         <div class="input-wrap">
             <input
                 type="date"
@@ -48,18 +51,21 @@
             />
             <span class="text">End Date</span>
         </div>
-        <div
-            class="trans-filter"
-            *ngFor="let filter of filters; index as i"
-            (click)="updateFilter(i, filter.type)"
-        >
-            <span
-                class="trans-round"
-                [class.trans-round-checked]="filter.checked"
-            ></span>
-            <p>{{ filter.name }}</p>
-            <span class="log-icon {{ filter.color }}"></span>
-        </div>
+        <ng-container *ngFor="let filter of filters; index as i">
+            <div
+                class="trans-filter"
+                *ngIf="!filter.admin || filter.admin == currentUser.admin"
+                (click)="updateFilter(i, filter.type)"
+            >
+                <span
+                    class="trans-round"
+                    [class.trans-round-checked]="filter.checked"
+                ></span>
+                <p>{{ filter.name }}</p>
+                <span class="log-icon {{ filter.color }}"></span>
+            </div>
+        </ng-container>
+
         <button class="button" (click)="applyFilter()">Apply Filter</button>
     </div>
 </div>

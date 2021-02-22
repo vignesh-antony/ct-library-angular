@@ -456,24 +456,25 @@ class DBServer {
             return this.response["add_success"];
         }
     }
-    async getTransactions(data) {
+    async getTransactions(data, staff, role) {
         let query_get = "";
         let query = "SELECT `type_ref`,`content`,`logTime` FROM `logs` ";
         let query_count = "SELECT COUNT(`logID`) as total FROM `logs` ";
 
         let params = [];
+        let staff_id = role ? data.staff : staff;
 
         if (
             data != null &&
-            data.staff != undefined &&
-            (data.staff ||
+            staff_id != undefined &&
+            (staff_id ||
                 data.start_date ||
                 data.end_date ||
                 (data.type && data.type.length))
         ) {
             query_get += "WHERE ";
 
-            if (data.type.length != 0) {
+            if (data.type && data.type.length != 0) {
                 query_get += "`type_ref` IN (";
 
                 data.type.forEach((elem) => {
@@ -484,16 +485,16 @@ class DBServer {
                 query_get = query_get.slice(0, -1);
                 query_get += ") ";
 
-                if (data.staff || data.start_date || data.end_date)
+                if (staff_id || data.start_date || data.end_date)
                     query_get += "AND ";
             }
 
-            if (data.staff) {
+            if (staff_id) {
                 query_get += "`sID` = ? ";
-                params.push(data.staff);
+                params.push(staff_id);
             }
 
-            if (data.staff && (data.start_date || data.end_date))
+            if (staff_id && (data.start_date || data.end_date))
                 query_get += "AND ";
 
             if (data.start_date && data.end_date) {

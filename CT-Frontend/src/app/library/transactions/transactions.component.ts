@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService, User } from 'src/app/auth/auth.service';
 import { DateService } from '../services/date.service';
 import { TransactionsService } from '../services/transactions.service';
 
@@ -30,10 +31,13 @@ export class TransactionsComponent implements OnInit {
     total_records: number;
     per_page: number = 12;
 
+    currentUser: User;
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private dateService: DateService,
-        private tranService: TransactionsService
+        private tranService: TransactionsService,
+        private auth: AuthService
     ) {
         this.staff = { value: 0, name: 'Select Staff' };
 
@@ -44,6 +48,10 @@ export class TransactionsComponent implements OnInit {
                 list: [this.staff].concat(data['staff']),
                 selected: 0,
             };
+        });
+
+        this.auth.currentUser.subscribe((data) => {
+            this.currentUser = data;
         });
 
         this.ftype = new Set();
@@ -71,6 +79,7 @@ export class TransactionsComponent implements OnInit {
                 type: 0,
                 checked: false,
                 color: 'admin-log',
+                admin: true,
             },
         ];
 

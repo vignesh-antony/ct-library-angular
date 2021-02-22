@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 export class BorrowedBooksService {
     constructor(private http: HttpClient) {}
     getBorrowedBooks(): Observable<any> {
-        return this.http.get(environment.API + '/borrowed-books/1');
+        return this.http.get(environment.API + '/borrowed-books');
     }
     getPendingBooks(): Observable<any> {
         return this.http.get(environment.API + '/pending-books');

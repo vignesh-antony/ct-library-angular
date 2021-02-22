@@ -19,6 +19,7 @@ import { LibraryComponent } from './library.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthStateGuard } from '../auth/auth-state.guard';
+import { AuthAdminGuard } from '../auth/auth-admin.guard';
 
 const routes: Routes = [
     {
@@ -50,6 +51,7 @@ const routes: Routes = [
             {
                 path: 'issue-books',
                 component: IssueBooksComponent,
+                canActivate: [AuthAdminGuard],
                 resolve: {
                     data: StaffResolver,
                     categ: CategoryResolver,
@@ -58,6 +60,7 @@ const routes: Routes = [
             {
                 path: 'renew-books',
                 component: RenewBooksComponent,
+                canActivate: [AuthAdminGuard],
                 resolve: {
                     data: StaffResolver,
                 },
@@ -65,6 +68,7 @@ const routes: Routes = [
             {
                 path: 'book-category',
                 component: BookCategoryComponent,
+                canActivate: [AuthAdminGuard],
                 resolve: {
                     data: BookCategoryResolver,
                 },
@@ -72,6 +76,7 @@ const routes: Routes = [
             {
                 path: 'manage-books',
                 component: ManageBooksComponent,
+                canActivate: [AuthAdminGuard],
                 resolve: {
                     categ: CategoryResolver,
                 },
