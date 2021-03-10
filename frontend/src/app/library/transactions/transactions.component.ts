@@ -142,7 +142,6 @@ export class TransactionsComponent implements OnInit {
                 type: Array.from(this.ftype),
             };
         } else this.params.start = start;
-
         this.tranService.getTransactions(this.params).subscribe((data) => {
             this.total_records = data['total'];
             this.convertToJSON(data['transactions']);

@@ -1,0 +1,47 @@
+<div class="body-container">
+    <div class="main">
+        <div class="box">
+            <span class="icon search-book"></span>
+            <h3>Search Books</h3>
+            <span class="total">
+                <span>Total Books</span>
+                <span>{{ stats.total }}</span>
+            </span>
+            <p>
+                Are you in need of a specific book? Search by
+                <b>title, author, publications</b> or published year using the
+                search box available in this page..
+            </p>
+            <a routerLink="./search-books" class="button s-icon">Search</a>
+        </div>
+        <div class="box">
+            <span class="icon search-book borrow"></span>
+            <h3>Borrowed Books</h3>
+            <span class="total">
+                <span>Borrowed Books</span>
+                <span>{{ stats.borrow }}</span>
+            </span>
+            <p>
+                You can view the books borrowed from the library here. Each book
+                must be renewed in
+                <b> months</b>
+                from the date of borrow.
+            </p>
+            <a routerLink="./borrowed-books" class="button b-icon">View</a>
+        </div>
+        <div class="box">
+            <span class="icon search-book renew"></span>
+            <h3>Pending Books</h3>
+            <span class="total">
+                <span>Books to be renewed</span>
+                <span>{{ stats.pending }}</span>
+            </span>
+            <p>
+                You can view the books <b>which are not renewed</b> within
+                <?php echo getRenewalTime($conn); ?>
+                months here. You have to renew your book as soon as possible.
+            </p>
+            <a routerLink="./pending-books" class="button r-icon">Manage</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="body-container">
+    <h2 class="main-title">
+        <span>Library Stats</span>
+    </h2>
+    <section class="main">
+        <div class="box tot-books">
+            <span class="round-value">
+                {{ stats.total }}
+            </span>
+            <div class="details">
+                <h3>Total Books</h3>
+                <span>Total number of books in the Library</span>
+                <a routerLink="../search-books" class="button">View Books</a>
+            </div>
+        </div>
+        <div class="box borrow">
+            <span class="round-value">
+                {{ stats.borrow }}
+            </span>
+            <div class="details">
+                <h3>Borrowed Books</h3>
+                <span>Total number of books borrowed</span>
+                <a routerLink="../borrowed-books" class="button">Manage</a>
+            </div>
+        </div>
+        <div class="box expire">
+            <span class="round-value">
+                {{ stats.pending }}
+            </span>
+            <div class="details">
+                <h3>Pending Books</h3>
+                <span>Total number of books not renewed</span>
+                <a href="#" class="button">Find out</a>
+            </div>
+        </div>
+    </section>
+    <br /><br />
+    <section class="main">
+        <a routerLink="../issue-books" class="box issue">
+            <div class="info">
+                <h3>Issue Books</h3>
+                <p>Click here to issue books to staffs</p>
+            </div>
+            <span class="icon"></span>
+        </a>
+        <a routerLink="../renew-books" class="box issue">
+            <div class="info">
+                <h3>Renew - Return Books</h3>
+                <p>Click here to renew or return books</p>
+            </div>
+            <span class="icon renew"></span>
+        </a>
+    </section>
+    <section class="main manage-all">
+        <h2 class="manage">Manage</h2>
+        <div class="boxes">
+            <div class="box manage-books">
+                <span class="icon books"></span>
+                <h3>Books</h3>
+                <p>You can insert, update and delete books</p>
+                <a routerLink="../manage-books" class="button">Manage Books</a>
+            </div>
+            <div class="box manage-books">
+                <span class="icon staff"></span>
+                <h3>Book Requests</h3>
+                <p>Check out book requests</p>
+                <a routerLink="/" class="button">View List</a>
+            </div>
+            <div class="box manage-books">
+                <span class="icon log"></span>
+                <h3>Log Records</h3>
+                <p>Manage the overall log records</p>
+                <a routerLink="../transactions" class="button">Check Logs</a>
+            </div>
+        </div>
+    </section>
+    <br /><br />
+</div>

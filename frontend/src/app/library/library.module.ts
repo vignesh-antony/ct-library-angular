@@ -23,6 +23,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +45,8 @@ import { LoginComponent } from './login/login.component';
         ManageBooksComponent,
         TransactionsComponent,
         LoginComponent,
+        AdminDashboardComponent,
+        DashboardComponent,
     ],
     imports: [
         CommonModule,

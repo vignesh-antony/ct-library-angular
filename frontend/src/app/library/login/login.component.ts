@@ -27,7 +27,13 @@ export class LoginComponent implements OnInit {
                     this.alertBox.showAlertBox(data);
                 } else {
                     this.auth.storeToken(data);
-                    this.route.navigate(['/library']);
+                    this.auth.currentUser.subscribe((data) => {
+                        if (data.logged) {
+                            if (data.admin)
+                                this.route.navigate(['/library/admin']);
+                            else this.route.navigate(['/library']);
+                        } else this.route.navigate(['/library']);
+                    });
                 }
             });
     }

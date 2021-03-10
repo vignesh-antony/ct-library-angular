@@ -20,6 +20,9 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthStateGuard } from '../auth/auth-state.guard';
 import { AuthAdminGuard } from '../auth/auth-admin.guard';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { StatsResolver } from './resolver/stats.resolver';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
     {
@@ -27,6 +30,17 @@ const routes: Routes = [
         component: LibraryComponent,
         canActivate: [AuthGuard],
         children: [
+            {
+                path: '',
+                component: DashboardComponent,
+                resolve: { data: StatsResolver },
+            },
+            {
+                path: 'admin',
+                component: AdminDashboardComponent,
+                canActivate: [AuthAdminGuard],
+                resolve: { data: StatsResolver },
+            },
             {
                 path: 'search-books',
                 component: SearchBookComponent,
