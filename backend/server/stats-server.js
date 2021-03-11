@@ -18,11 +18,11 @@ class StatsServer {
             return Promise.resolve(this.response["error"]);
         }
     }
-    getBorrowCount(data) {
+    getBorrowCount(data, role) {
         let params = [];
 
         let query = "SELECT COUNT(`bID`) as borrow FROM `booklist`";
-        if (data) {
+        if (data && !role) {
             query += " WHERE `ID` = ?";
             params.push(data);
         }
@@ -33,12 +33,12 @@ class StatsServer {
         let query = "SELECT COUNT(`bID`) as total FROM `book`";
         return this.getData(query, []);
     }
-    getPendingCount(data) {
+    getPendingCount(data, role) {
         let params = [];
 
         let query =
             "SELECT COUNT(`bID`) as pending FROM `booklist` WHERE `timeOut` < ?";
-        if (data) {
+        if (data && !role) {
             query += " AND `ID` = ?";
             params.push(new Date(), data);
         } else params.push(new Date());

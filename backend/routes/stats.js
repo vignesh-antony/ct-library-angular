@@ -6,8 +6,8 @@ routes.use(middleware.verifyToken);
 
 routes.get("/library", async (req, res) => {
     const total = await stats.getTotalBooks();
-    const borrow = await stats.getBorrowCount(req.staff_id);
-    const pending = await stats.getPendingCount(req.staff_id);
+    const borrow = await stats.getBorrowCount(req.staff_id, req.role);
+    const pending = await stats.getPendingCount(req.staff_id, req.role);
 
     res.send({
         total: total[0].total,

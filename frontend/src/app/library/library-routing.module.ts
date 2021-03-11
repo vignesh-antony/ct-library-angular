@@ -23,6 +23,7 @@ import { AuthAdminGuard } from '../auth/auth-admin.guard';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { StatsResolver } from './resolver/stats.resolver';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthUserGuard } from '../auth/auth-user.guard';
 
 const routes: Routes = [
     {
@@ -33,6 +34,7 @@ const routes: Routes = [
             {
                 path: '',
                 component: DashboardComponent,
+                canActivate: [AuthUserGuard],
                 resolve: { data: StatsResolver },
             },
             {
@@ -51,6 +53,7 @@ const routes: Routes = [
             {
                 path: 'borrowed-books',
                 component: BorrowedBooksComponent,
+                canActivate: [AuthUserGuard],
                 resolve: {
                     data: BorrowedBooksResolver,
                 },
@@ -58,6 +61,7 @@ const routes: Routes = [
             {
                 path: 'pending-books',
                 component: PendingBooksComponent,
+                canActivate: [AuthUserGuard],
                 resolve: {
                     data: PendingBooksResolver,
                 },
